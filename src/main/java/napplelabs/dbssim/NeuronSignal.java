@@ -33,9 +33,16 @@ public class NeuronSignal implements AudioSignal {
 	
 	private float[] spike;
 	private int counter = 0;
+	private int space_len = 44100;
+	//private int spike_cnt = 0;
+	private int space_cnt = 0;
+	private float minRate = 1;
+	private float maxRate = 10;
 	
-	public NeuronSignal(float[] spike) {
+	public NeuronSignal(float[] spike, float minRate, float maxRate) {
 		this.spike = spike;
+		this.minRate = minRate;
+		this.maxRate = maxRate;
 	}
 	
 	public void generate(float[] signal) {
@@ -45,9 +52,26 @@ public class NeuronSignal implements AudioSignal {
 	}
 	
 	public float getNextValue() {
-		float next = spike[counter];
+		float next = 0;
+		
+		//If counter is within spike range, output next spike value
+		if(counter < spike.length) {
+			next = spike[counter];		
+		}
+		
+		//else it's in the space range, output 0
+		
 		counter++;
-		if(counter >= spike.length) counter = 0;
+		
+		if(counter >= spike.length + space_len) {
+			counter = 0;
+			float diff = maxRate - minRate;
+			//System.out.println(diff);
+			float rnd = (float) (Math.random() * diff + minRate);
+			space_len = (int) (44100 / rnd);
+			//System.out.println(space_len);
+			//System.out.println();
+		}
 		return next;
 	}
 

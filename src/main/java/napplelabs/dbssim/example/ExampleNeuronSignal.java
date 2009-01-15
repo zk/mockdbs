@@ -22,15 +22,16 @@ public class ExampleNeuronSignal {
 		out = minim.getLineOut(Minim.MONO);
 		
 		double one = (float) (Math.PI / 100);
-		int sin_size = 1000;
+		int sin_size = 100;
 		float[] sin = new float[sin_size];
 		for(int i=0; i < sin_size; i++) {
 			sin[i] = (float) Math.sin(one * i);
 		}
 		
-		ns = new NeuronSignal(sin);
+		ns = new NeuronSignal(sin, 5, 50);
 		
 		out.addSignal(ns);
+		out.addSignal(new PinkNoise(0.1f));
 		
 		TracePanel panel = new TracePanel(out);
 		frame.setContentPane(panel);

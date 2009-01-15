@@ -33,7 +33,7 @@ public class TracePanel extends JPanel implements Runnable {
 			double one = (double) getWidth() / (double) leftSize;
 			double diff = i * one;
 			
-			g.drawLine((int) diff, (int) (getHeight()/2 + signal.left.get(i)*getHeight()/2), (int) (diff + one), (int) (getHeight()/2 + signal.left.get(i+1)*getHeight()/2));
+			g.drawLine((int) diff, (int) (getHeight()/2 + -signal.left.get(i)*getHeight()/2), (int) (diff + one), (int) (getHeight()/2 + -signal.left.get(i+1)*getHeight()/2));
 		}
 	}
 
