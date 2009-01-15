@@ -15,6 +15,8 @@ public class MacFrame{
 	JPanel content;
 	List<JButton> toolbarButtons = []
 	
+	boolean visible = false
+	
 	public MacFrame() {
 		
 		
@@ -31,8 +33,14 @@ public class MacFrame{
 		content.layout = new BorderLayout()
 		frame.contentPane.add(content, BorderLayout.CENTER)
 		
-		frame.visible = true;
-		
+	}
+	
+	public void setVisisble(boolean vis) {
+		frame.visible = vis
+	}
+	
+	public boolean getVisible() {
+		return frame.visible
 	}
 	
 	def revalidate() {
