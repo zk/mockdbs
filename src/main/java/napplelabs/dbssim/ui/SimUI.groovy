@@ -1,6 +1,6 @@
 package napplelabs.dbssim.ui
 
-import ddf.minim.Minimimport ddf.minim.AudioOutputimport napplelabs.dbssim.NeuronSignalimport napplelabs.dbssim.TracePanelimport ddf.minim.signals.PinkNoiseimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.MacButtonFactoryimport javax.swing.AbstractButtonimport javax.swing.JButtonimport javax.swing.ImageIconimport javax.swing.JToggleButtonimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroupclass SimUI {
+import ddf.minim.Minimimport ddf.minim.AudioOutputimport napplelabs.dbssim.NeuronSignalimport napplelabs.dbssim.TracePanelimport ddf.minim.signals.PinkNoiseimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.MacButtonFactoryimport javax.swing.AbstractButtonimport javax.swing.JButtonimport javax.swing.ImageIconimport javax.swing.JToggleButtonimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroupimport java.awt.event.ActionListenerimport javax.swing.SwingUtilitiesimport java.lang.Runnableclass SimUI {
 	MacFrame mf
 	public SimUI() {
 		mf = new MacFrame()
@@ -20,7 +20,8 @@ import ddf.minim.Minimimport ddf.minim.AudioOutputimport napplelabs.dbssim.Neu
 		out.addSignal(ns);
 		out.addSignal(new PinkNoise(0.1f));
 		
-		TracePanel panel = new TracePanel(out);
+		final TracePanel panel = new TracePanel(out);
+		panel.start()
 		
 		mf.content.add(panel, BorderLayout.CENTER)
 		
@@ -31,29 +32,40 @@ import ddf.minim.Minimimport ddf.minim.AudioOutputimport napplelabs.dbssim.Neu
 		
 		mf.addToolbarComponentRight(playButton)
 		
+		JButton control = new JButton("Control");
+		control.putClientProperty("JButton.buttonType", "segmentedTextured");
+		control.putClientProperty("JButton.segmentPosition", "first");
+		control.setFocusable(false);
+		control.addActionListener({
+			mf.content.remove(panel)
+			SwingUtilities.invokeLater({
+				mf.content.repaint()
+				mf.revalidate()
+			} as Runnable)
+		} as ActionListener);
 		
-		JToggleButton leftButton = new JToggleButton("Control");
-        
-        leftButton.putClientProperty("JButton.buttonType", "segmentedTextured");
-        leftButton.putClientProperty("JButton.segmentPosition", "first");
-        leftButton.setFocusable(false);
-
-        JToggleButton rightButton = new JToggleButton("Trace");
-        rightButton.putClientProperty("JButton.buttonType", "segmentedTextured");
-        rightButton.putClientProperty("JButton.segmentPosition", "last");
-        rightButton.setFocusable(false);
-
-        ButtonGroup group = new ButtonGroup();
-        group.add(leftButton);
-        group.add(rightButton);
-
-        LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, leftButton, rightButton);
-        
-        mf.addToolbarComponentCenter(viewButtons.component)
+		JButton trace = new JButton("Trace");
+		trace.putClientProperty("JButton.buttonType", "segmentedTextured");
+		trace.putClientProperty("JButton.segmentPosition", "last");
+		trace.setFocusable(false);
+		trace.addActionListener({
+			mf.content.add(panel, BorderLayout.CENTER)
+			SwingUtilities.invokeLater({
+				mf.content.repaint()
+				mf.revalidate()
+			} as Runnable)
+		} as ActionListener);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(control)
+		group.add(trace)
+		
+		LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, control, trace);
+		mf.addToolbarComponentCenter(viewButtons.component)
 		
 		mf.revalidate()
 		
-		new Thread(panel).start()
+		
 	}
 	
 	public static void main(String[] args) {

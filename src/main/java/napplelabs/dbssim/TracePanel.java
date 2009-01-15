@@ -48,6 +48,7 @@ public class TracePanel extends JPanel implements Runnable {
 	}
 	
 	public void run() {
+		done = false;
 		while(!isDone()) {
 		SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -62,5 +63,13 @@ public class TracePanel extends JPanel implements Runnable {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void start() {
+		new Thread(this).start();
+	}
+	
+	public void stop() {
+		this.done = true;
 	}
 }
