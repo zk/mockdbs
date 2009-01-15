@@ -24,7 +24,7 @@ import ddf.minim.AudioSignal;
  *  ns.generate(first_chunk); // gets first chunk
  *  ns.generate(second_chunk); // gets second chunk
  *  
- *  //Send first and second chunk to output
+ *  //Then send first and second chunk to output
  * @author zkim
  *
  */
@@ -40,11 +40,15 @@ public class NeuronSignal implements AudioSignal {
 	
 	public void generate(float[] signal) {
 		for(int i=0; i < signal.length; i++) {
-			signal[i] = spike[counter];
-			
-			counter++;
-			if(counter >= spike.length) counter = 0;
+			signal[i] = getNextValue(); 
 		}
+	}
+	
+	public float getNextValue() {
+		float next = spike[counter];
+		counter++;
+		if(counter >= spike.length) counter = 0;
+		return next;
 	}
 
 	public void generate(float[] left, float[] right) {

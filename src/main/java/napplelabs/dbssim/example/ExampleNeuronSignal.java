@@ -20,8 +20,6 @@ public class ExampleNeuronSignal {
 		
 		Minim minim = new Minim(null);
 		out = minim.getLineOut(Minim.MONO);
-		//pink = new PinkNoise(0.2f);
-		
 		
 		double one = (float) (Math.PI / 100);
 		int sin_size = 1000;
