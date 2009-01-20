@@ -1,18 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+    Generated from archetype; please customize.
+-->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>napplelabs</groupId>
-  <artifactId>dbssim</artifactId>
-  <packaging>jar</packaging>
-  <version>0.1-SNAPSHOT</version>
-  <name>dbssim</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.5</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>napplelabs</groupId>
+	<artifactId>dbssim</artifactId>
+	<name>DBS Simulator</name>
+	<version>1.0-SNAPSHOT</version>
+	
+	<repositories>
+		<repository>
+		<id>napplelabs_public</id>
+		<url>http://173.45.240.216:11081/nexus/content/groups/public/</url>
+		
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.codehaus.groovy.maven.runtime</groupId>
+			<artifactId>gmaven-runtime-default</artifactId>
+			<version>1.0-rc-3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.explodingpixels</groupId>
+			<artifactId>forms</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.guice</groupId>
+			<artifactId>guice</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>minim</groupId>
+			<artifactId>jl</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>minim</groupId>
+			<artifactId>jsminim</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>minim</groupId>
+			<artifactId>minim-spi</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>minim</groupId>
+			<artifactId>minim</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>minim</groupId>
+			<artifactId>mp3spi</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>minim</groupId>
+			<artifactId>tritonus_aos</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>minim</groupId>
+			<artifactId>tritonus_share</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>processing</groupId>
+			<artifactId>core</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.explodingpixels</groupId>
+			<artifactId>macwidgets</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>miglayout</groupId>
+			<artifactId>miglayout</artifactId>
+			<version>3.6.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>1.0-rc-3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generateStubs</goal>
+							<goal>compile</goal>
+							<goal>generateTestStubs</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>napplelabs_release</id>
+			<name>Napplelabs Release</name>
+			<url>sftp://173.45.240.216/home/nexus/repo/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>napplelabs_snapshot</id>
+			<name>Napplelabs Snapshot</name>
+			<url>sftp://173.45.240.216/home/nexus/repo/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 </project>
