@@ -1,9 +1,9 @@
 package napplelabs.dbssim
 
-import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignalimport ddf.minim.signals.PinkNoiseimport ddf.minim.Minimimport processing.core.PAppletimport ddf.minim.AudioOutputclass SignalContainer {
+import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignalimport ddf.minim.signals.PinkNoiseimport ddf.minim.Minimimport processing.core.PAppletimport ddf.minim.AudioOutputimport java.io.Fileclass SignalContainer {
 	
-	private List<AudioPlayer> audioPlayers = []
-	PinkNoise pink = new PinkNoise(0.1f)
+	private List<RecordedSignal> recordedSignals = []
+	PinkNoise pink = new PinkNoise(0.7f)
 	AudioOutput out
 	Minim minim
 	
@@ -16,7 +16,12 @@ import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignal
 //		final AudioPlayer player = minim.loadFile("/Users/zkim/Desktop/Rage Against The Machine - rage against the machine - 06 - Know Your Enemy.mp3");
 		//final AudioPlayer player = minim.loadFile("/Users/zkim/Desktop/OUT.mp3");
 		final AudioPlayer player = minim.loadFile(signal);
-		add(player)
+		player.gain = -80
+		
+		def rs = new RecordedSignal(name: new File(signal).name, player: player);
+		add(rs)
+		
+		
 		//final AudioPlayer player2 = minim.loadFile("/Users/zkim/Desktop/Rage Against The Machine - rage against the machine - 06 - Know Your Enemy.mp3");
 		player.printControls()
 		//player2.loop()
@@ -26,7 +31,7 @@ import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignal
 	}
 	
 	public void play() {
-		audioPlayers.each {
+		recordedSignals.each {
 			it.loop()
 		}
 		
@@ -76,8 +81,8 @@ import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignal
 		
 	}
 	
-	public void add(AudioPlayer player) {
-		audioPlayers += player
+	public void add(RecordedSignal sig) {
+		recordedSignals += sig
 	}
 	
 	public void remove(AudioPlayer player) {
@@ -86,10 +91,10 @@ import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignal
 	
 	public float[] getSamples() {
 		float[] out = new float[1024]
-		audioPlayers.each { player ->
-			if(!player.muted) {
+		recordedSignals.each { sig ->
+			if(!sig.player.muted) {
 				for(int i=0; i < out.length; i++) {
-					out[i] = out[i] + player.left.get(i)
+					out[i] = out[i] + sig.player.left.get(i)
 				}
 			}
 			
@@ -113,4 +118,13 @@ import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignal
 		c.mute = false;
 	}
 	
+}
+
+class RecordedSignal {
+	AudioPlayer player
+	String name
+	
+	def loop() {
+		player.loop()
+	}
 }

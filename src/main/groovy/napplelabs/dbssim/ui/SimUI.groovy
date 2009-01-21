@@ -9,7 +9,7 @@ import napplelabs.dbssim.SignalContainerclass SimUI {
 	ControlHud controlHud
 	
 	public SimUI() {
-		mf = new MacFrame()
+		mf = new MacFrame(1200, 800)
 		
 		Minim minim = new Minim(new PApplet());
 		
@@ -22,9 +22,25 @@ import napplelabs.dbssim.SignalContainerclass SimUI {
 		
 		SignalContainer container = new SignalContainer()
 		
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav")
 		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/11-PD-STN-2unit.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/12-PD-STN.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/13-PD-STN.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/14-PD-STN.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/2-dystonia-gpe.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/2-PD-GPe-burster.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/3-dystonia-gpi.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/4-dystonia-gpi.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/4-PD-border.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/5-dystonia-gpi.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/5-PD-gpi.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/6-PD-gpi.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav")
 		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/8-PD-gpi-tremor.wav")
+		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/9-PD-optictract-multipleaxons.wav")
+		
 		
 		
 		
@@ -90,7 +106,8 @@ import napplelabs.dbssim.SignalContainerclass SimUI {
 		container.play()
 		
 		controlHud = new ControlHud(container)
-		panel.start()
+		controlHud.visible = true
+		//panel.start()
 		
 	}
 	

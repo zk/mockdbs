@@ -28,7 +28,7 @@ import com.explodingpixels.macwidgets.HudWindowimport java.awt.Dimensionimport
 		createNeuronControls()
 		createPinkNoiseControls()
 		
-		dialog.setSize(300, 400);
+		dialog.setSize(400, 700);
         dialog.setLocationRelativeTo(null);
         dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
@@ -62,15 +62,15 @@ import com.explodingpixels.macwidgets.HudWindowimport java.awt.Dimensionimport
 	
 	def createNeuronControls() {
 		
-		container.audioPlayers.each { player ->
-			JCheckBox masterCheckbox = new JCheckBox("Neuron")
+		container.recordedSignals.each { sig ->
+			JCheckBox masterCheckbox = new JCheckBox(sig.name)
 			masterCheckbox.name = "master_checkbox"
 			masterCheckbox.uI = new HudCheckBoxUI()
 			masterCheckbox.addActionListener({
 				if(!masterCheckbox.selected) {
-					player.mute()
+					sig.player.mute()
 				} else {
-					player.unmute()
+					sig.player.unmute()
 				}
 			} as ActionListener)
 			masterCheckbox.selected = true;
@@ -79,8 +79,9 @@ import com.explodingpixels.macwidgets.HudWindowimport java.awt.Dimensionimport
 			masterSlider.name = "master_slider"
 			masterSlider.minimum = -80
 			masterSlider.maximum = 14
+			masterSlider.value = sig.player.gain
 			masterSlider.addChangeListener({
-				player.gain = masterSlider.value
+				sig.player.gain = masterSlider.value
 			} as ChangeListener)
 			
 			panel.add(masterCheckbox)

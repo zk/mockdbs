@@ -17,12 +17,12 @@ public class MacFrame{
 	
 	boolean visible = false
 	
-	public MacFrame() {
+	public MacFrame(int width, int height) {
 		
 		
 		frame = new JFrame("DBS Simulator")
 		frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-		frame.size = new Dimension(500, 300)
+		frame.size = new Dimension(width, height)
 		
 		toolbar = MacWidgetFactory.createUnifiedToolBar()
 		frame.contentPane.add(toolbar.component, BorderLayout.NORTH)
