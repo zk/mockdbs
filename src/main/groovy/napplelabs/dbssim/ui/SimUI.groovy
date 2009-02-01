@@ -75,7 +75,9 @@ class SimUI {
 		//panel.start()
 		
 		//mf.content.add(panel, BorderLayout.CENTER)
-		
+
+
+        //Set up control button
 		AbstractButton playButton =
                 MacButtonFactory.makeUnifiedToolBarButton(
                         new JButton("Control", new ImageIcon(SimUI.class.getResource(
@@ -89,17 +91,17 @@ class SimUI {
 		
 		mf.addToolbarComponentRight(playButton)
 		
-		final JPanel canvasPanel = new JPanel()
+
+        //Set up tabs
 
 		tracePanel = new TracePApplet(container)
 		tracePanel.init()
 
+        def canvasPanel = new CanvasPanel()
+
 		TabManager tabManager = new TabManager(mf.content)
         tabManager.add("Canvas", canvasPanel)
         tabManager.add("Trace", tracePanel)
-
-        tabManager.load("Canvas");
-		
 
 
         mf.addToolbarComponentCenter(tabManager.build().component)
@@ -107,6 +109,8 @@ class SimUI {
 		mf.frame.visible = true
 		
 		container.play()
+
+        tabManager.currentComponent = canvasPanel
 		
 		controlHud = new ControlHud(container)
 		//controlHud.visible = true

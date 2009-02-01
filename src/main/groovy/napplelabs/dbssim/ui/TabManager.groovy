@@ -58,7 +58,7 @@ public class TabManager {
                 currentComponent = tabComponents[name]
                 SwingUtilities.invokeLater({
                     parent.repaint()
-                    //parent.revalidate()
+                    parent.revalidate()
                 } as Runnable)
             } as ActionListener);
 
@@ -68,15 +68,25 @@ public class TabManager {
 
 
 
-		LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, controls);
+		LabeledComponentGroup viewButtons = new LabeledComponentGroup("Views", controls);
     }
 
     public void load(String name) {
-        def component = tabComponents[name]
+        def component = tabComponents.get(name)
         if(!component) return
+
+        currentComponent = component
+    }
+
+    public void setCurrentComponent(Component component) {
+        
         
         parent.remove(currentComponent)
 		currentComponent = component
 		parent.add currentComponent, BorderLayout.CENTER
+    }
+
+    public Component getCurrentComponent() {
+        return currentComponent
     }
 }
