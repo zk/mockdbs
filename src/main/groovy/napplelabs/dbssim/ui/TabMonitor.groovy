@@ -1,0 +1,71 @@
+package napplelabs.dbssim.ui
+
+import javax.swing.JComponent
+import java.awt.Component
+import com.explodingpixels.macwidgets.TriAreaComponent
+import com.explodingpixels.macwidgets.MacWidgetFactory
+import com.explodingpixels.macwidgets.LabeledComponentGroup
+import javax.swing.ButtonGroup
+import javax.swing.JToggleButton
+import java.awt.event.ActionListener
+import javax.swing.JPanel
+import javax.swing.SwingUtilities
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: zkim
+ * Date: Jan 31, 2009
+ * Time: 6:37:14 PM
+ * To change this template use File | Settings | File Templates.
+ */
+
+public class TabMonitor {
+
+    List<String> tabNames = []
+    Map<String, Component> tabComponents = [:]
+    Component currentComponent = new JPanel()
+
+    public TabMonitor() {
+    }
+
+    public TabMonitor add(String name, Component comp) {
+        tabNames += name
+        tabComponents.put(name, comp)
+    }
+
+    public LabeledComponentGroup build() {
+        ButtonGroup group = new ButtonGroup();
+
+        def controls = []
+
+        tabNames.eachWithIndex {String name, int i ->
+            JToggleButton control = new JToggleButton(name);
+            control.putClientProperty("JButton.buttonType", "segmentedTextured");
+            if(i == 0) {
+                control.putClientProperty("JButton.segmentPosition", "first");
+            } else if(i == tabNames.size()-1) {
+                control.putClientProperty("JButton.segmentPosition", "last");
+            } else {
+                control.putClientProperty("JButton.segmentPosition", "middle");
+            }
+
+            control.setFocusable(false);
+            control.addActionListener({
+                def parent = currentComponent.parent
+                currentComponent = tabComponents[name]
+                SwingUtilities.invokeLater({
+                    parent.repaint()
+                    //parent.revalidate()
+                } as Runnable)
+            } as ActionListener);
+
+            group.add(control)
+            controls += control
+        }
+
+
+
+		LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, controls);
+    }
+    
+}

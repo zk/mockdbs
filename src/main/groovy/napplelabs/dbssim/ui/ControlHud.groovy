@@ -23,10 +23,11 @@ import com.explodingpixels.macwidgets.HudWindowimport java.awt.Dimensionimport
 		hud.contentPane.layout = new BorderLayout()
 		hud.contentPane.add(panel, BorderLayout.CENTER)
 		
-		panel.setLayout(new MigLayout("wrap 2"));
-		createMasterControls()
-		createNeuronControls()
+		panel.setLayout(new MigLayout("wrap 2, fill"));
+		//createMasterControls()
 		createPinkNoiseControls()
+		createNeuronControls()
+		
 		
 		dialog.setSize(400, 700);
         dialog.setLocationRelativeTo(null);
@@ -126,9 +127,10 @@ import com.explodingpixels.macwidgets.HudWindowimport java.awt.Dimensionimport
 		} as ChangeListener)
 		panel.add(pinkSlider)
 		
+		pinkSlider.value = container.pink.amp * 100
 		if(container.pink.amp > 0) {
 			pinkCheck.selected = true
-			pinkSlider.value = container.pink.amp * 100
+			
 		}
 	}
 	

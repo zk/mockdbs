@@ -18,7 +18,7 @@ import ddf.minim.AudioSignal;
 public class TracePanel extends JPanel implements Runnable {
 	
 	private int counter = 0;
-	private float[] trace = new float[200000];
+	private float[] trace = new float[50000];
 	
 	private boolean done = false;
 	private boolean resizeFlag = false;
@@ -29,10 +29,8 @@ public class TracePanel extends JPanel implements Runnable {
 	public TracePanel(SignalContainer container) {
 		this.container = container;
 		
-		//ssetOpaque(false);
-		//setBackground(Color.black);
-		
-		
+		setOpaque(true);
+		setBackground(Color.black);
 		
 		addComponentListener(new ComponentAdapter() {
 			
@@ -103,7 +101,7 @@ public class TracePanel extends JPanel implements Runnable {
 			});
 
 			try {
-				Thread.sleep(1000 / 40);
+				Thread.sleep(1000 / 30);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

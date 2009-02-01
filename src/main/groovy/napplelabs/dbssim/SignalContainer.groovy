@@ -3,7 +3,7 @@ package napplelabs.dbssim
 import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignalimport ddf.minim.signals.PinkNoiseimport ddf.minim.Minimimport processing.core.PAppletimport ddf.minim.AudioOutputimport java.io.Fileclass SignalContainer {
 	
 	private List<RecordedSignal> recordedSignals = []
-	PinkNoise pink = new PinkNoise(0.7f)
+	PinkNoise pink = new PinkNoise(0.0f)
 	AudioOutput out
 	Minim minim
 	
@@ -90,11 +90,17 @@ import java.util.Listimport ddf.minim.AudioPlayerimport ddf.minim.AudioSignal
 	}
 	
 	public float[] getSamples() {
-		float[] out = new float[1024]
+		
+		int n = 1024
+		float[] out = new float[n/3]
 		recordedSignals.each { sig ->
 			if(!sig.player.muted) {
+				
+				float mult = (sig.player.gain - sig.player.gain().minimum) / (sig.player.gain().maximum - sig.player.gain().minimum)
+				
+				
 				for(int i=0; i < out.length; i++) {
-					out[i] = out[i] + sig.player.left.get(i)
+					out[i] = out[i] + (sig.player.left.get(i) * mult)
 				}
 			}
 			

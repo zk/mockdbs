@@ -17,7 +17,6 @@
 		<repository>
 		<id>napplelabs_public</id>
 		<url>http://173.45.240.216:11081/nexus/content/groups/public/</url>
-		
 		</repository>
 	</repositories>
 
@@ -103,6 +102,16 @@
 			<artifactId>miglayout</artifactId>
 			<version>3.6.2</version>
 		</dependency>
+		<dependency>
+			<groupId>piccolo</groupId>
+			<artifactId>piccolo</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>piccolo</groupId>
+			<artifactId>piccolox</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -112,8 +121,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
