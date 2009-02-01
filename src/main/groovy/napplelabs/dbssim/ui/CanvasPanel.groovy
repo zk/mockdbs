@@ -17,6 +17,9 @@ import java.awt.BasicStroke
 import edu.umd.cs.piccolo.nodes.PText
 import java.awt.geom.Point2D
 import java.awt.Font
+import edu.umd.cs.piccolo.PLayer
+import javax.swing.event.ChangeListener
+import java.awt.Canvas
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,32 +39,38 @@ public class CanvasPanel extends JPanel {
     JPanel panel = new JPanel()
     add(panel, BorderLayout.EAST)
     panel.layout = new BorderLayout()
-    panel.add(new FeaturePanel(canvas), BorderLayout.CENTER)
-    panel.add(new DepthPanel(), BorderLayout.WEST)
+
+    PLayer backgroundLayer = new PLayer();
+    getCanvas().getCamera().addLayer(1, backgroundLayer);
+
+    Probe probe = new Probe()
+
+    panel.add(new FeaturePanel(canvas, canvas.layer), BorderLayout.CENTER)
+    panel.add(new DepthPanel(canvas, probe), BorderLayout.WEST)
 
     canvas.zoomEventHandler = new NapPZoomEventHandler()
     canvas.animatingRenderQuality = PPaintContext.HIGH_QUALITY_RENDERING
     canvas.interactingRenderQuality = PPaintContext.HIGH_QUALITY_RENDERING
     canvas.camera.setViewOffset(1000 / 2, 700 / 2);
 
-    Probe probe = new Probe()
+
     probe.rotate(Math.PI / 360 * 30)
-    canvas.layer.addChild(probe)
+    backgroundLayer.addChild(probe)
 
-    //canvas.layer.
+    canvas.layer.addInputEventListener(new NodeDragHandler())
 
-    canvas.layer.addInputEventListener(new NodeDragHandler(probe))
-
-
+    //Birds eye stuff
   }
 }
 
 class FeaturePanel extends JPanel {
 
   PCanvas canvas
+  PLayer layer
 
-  public FeaturePanel(PCanvas canvas) {
+  public FeaturePanel(PCanvas canvas, PLayer layer) {
     this.canvas = canvas
+    this.layer = layer
     init()
   }
 
@@ -99,7 +108,12 @@ class FeaturePanel extends JPanel {
 }
 
 class DepthPanel extends JPanel {
-  public DepthPanel() {
+  Probe probe
+  PCanvas canvas
+
+  public DepthPanel(PCanvas canvas, Probe probe) {
+    this.probe = probe
+    this.canvas = canvas
     init()
   }
 
@@ -107,9 +121,14 @@ class DepthPanel extends JPanel {
     JSlider slider = new JSlider(JSlider.VERTICAL)
     layout = new BorderLayout()
     add(slider, BorderLayout.CENTER)
-    slider.maximum = 200
-    slider.minimum = -100
+    slider.maximum = 100
+    slider.minimum = -200
     slider.value = 200
+
+    slider.addChangeListener({
+      probe.setDepth((double) slider.value / 10)
+      canvas.repaint()
+    } as ChangeListener) 
   }
 }
 
@@ -148,10 +167,10 @@ class SnrPath extends NeuronPath {
 }
 
 class NodeDragHandler extends PDragSequenceEventHandler {
-  Probe probe
+  
 
-  public NodeDragHandler(Probe probe) {
-    this.probe = probe
+  public NodeDragHandler() {
+
     getEventFilter().setMarksAcceptedEventsAsHandled(true);
   }
 
@@ -187,9 +206,13 @@ class Probe extends PNode {
     path.paint = Color.lightGray
     path.strokePaint = Color.lightGray
 
-    //PPath probe = PPath.createLine(0, 1000)
+    probe = PPath.createLine(0, 0, 0, -3000);
+
+    probe.offset = new Point2D.Double(0, -2000) 
+    probe.stroke = new BasicStroke(5)
 
     addChild(path)
+    addChild(probe)
     
     (10..-20).each {int i->
       PText t = new PText(-i+"mm")
@@ -199,17 +222,16 @@ class Probe extends PNode {
       addChild(t)
     }
 
-
-
-    
   }
 
-  public void setDepth(float depth) {
+  PPath probe
 
+  public void setDepth(double depth) {
+    probe.offset = new Point2D.Double(0.0, -depth * 100.0 - 1000)  
   }
 
-  public float getDepth() {
-    
+  public double getDepth() {
+    return probe.offset.y / 100
   }
 }
 

@@ -76,7 +76,7 @@
       <file leaf-file-name="SimUI.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/SimUI.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="33" selection-start="3863" selection-end="3863" vertical-scroll-proportion="0.0">
+            <state line="99" column="0" selection-start="3675" selection-end="3675" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -85,52 +85,16 @@
       <file leaf-file-name="CanvasPanel.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/CanvasPanel.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="6" selection-start="1517" selection-end="1517" vertical-scroll-proportion="-2.5475688">
+            <state line="61" column="21" selection-start="1826" selection-end="1826" vertical-scroll-proportion="0.94849783">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NapPZoomEventHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/NapPZoomEventHandler.java">
+      <file leaf-file-name="BirdsEyeViewExample.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/BirdsEyeViewExample.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="21" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SnrPath.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../Library/Caches/IntelliJIDEA80/compiler/dbssim.dbssim4c3d0c13/.generated/Groovy_to_java_source_code_generator/dbssim.4c3d0bb0/production/napplelabs/dbssim/ui/SnrPath.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="7" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StnPath.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../Library/Caches/IntelliJIDEA80/compiler/dbssim.dbssim4c3d0c13/.generated/Groovy_to_java_source_code_generator/dbssim.4c3d0bb0/production/napplelabs/dbssim/ui/StnPath.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="7" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PPath.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/piccolo/piccolo/1.2.1/piccolo-1.2.1.jar!/edu/umd/cs/piccolo/nodes/PPath.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="13" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TracePApplet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/TracePApplet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="16" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
+            <state line="324" column="40" selection-start="12135" selection-end="12135" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -395,9 +359,9 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
-  <component name="RunManager" selected="Application.SimUI">
-    <tempConfiguration default="false" name="SimUI" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
-      <option name="MAIN_CLASS_NAME" value="napplelabs.dbssim.ui.SimUI" />
+  <component name="RunManager" selected="Application.BirdsEyeViewExample">
+    <tempConfiguration default="false" name="BirdsEyeViewExample" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+      <option name="MAIN_CLASS_NAME" value="napplelabs.dbssim.ui.BirdsEyeViewExample" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -533,7 +497,7 @@
       <envs />
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Application.SimUI" />
+      <item index="0" class="java.lang.String" itemvalue="Application.BirdsEyeViewExample" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -690,30 +654,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/TracePApplet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="16" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/SimUI.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="33" selection-start="3863" selection-end="3863" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home/../Classes/classes.jar!/javax/swing/JSlider.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/piccolo/piccolo/1.2.1/piccolo-1.2.1.jar!/edu/umd/cs/piccolo/nodes/PPath.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -732,14 +675,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Library/Caches/IntelliJIDEA80/compiler/dbssim.dbssim4c3d0c13/.generated/Groovy_to_java_source_code_generator/dbssim.4c3d0bb0/production/napplelabs/dbssim/ui/SnrPath.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/piccolo/piccolo/1.2.1/piccolo-1.2.1.jar!/edu/umd/cs/piccolo/nodes/PText.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/TracePApplet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="24" selection-start="55" selection-end="55" vertical-scroll-proportion="0.054669704">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/piccolo/piccolo/1.2.1/piccolo-1.2.1.jar!/edu/umd/cs/piccolo/nodes/PPath.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Library/Caches/IntelliJIDEA80/compiler/dbssim.dbssim4c3d0c13/.generated/Groovy_to_java_source_code_generator/dbssim.4c3d0bb0/production/napplelabs/dbssim/ui/StnPath.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="7" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Library/Caches/IntelliJIDEA80/compiler/dbssim.dbssim4c3d0c13/.generated/Groovy_to_java_source_code_generator/dbssim.4c3d0bb0/production/napplelabs/dbssim/ui/StnPath.java">
+    <entry file="file://$PROJECT_DIR$/../../Library/Caches/IntelliJIDEA80/compiler/dbssim.dbssim4c3d0c13/.generated/Groovy_to_java_source_code_generator/dbssim.4c3d0bb0/production/napplelabs/dbssim/ui/SnrPath.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="7" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
           <folding />
@@ -753,16 +717,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/piccolo/piccolo/1.2.1/piccolo-1.2.1.jar!/edu/umd/cs/piccolo/nodes/PText.class">
+    <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/SimUI.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="99" column="0" selection-start="3675" selection-end="3675" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/BirdsEyeViewExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="324" column="40" selection-start="12135" selection-end="12135" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/groovy/napplelabs/dbssim/ui/CanvasPanel.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="6" selection-start="1517" selection-end="1517" vertical-scroll-proportion="-2.5475688">
+        <state line="61" column="21" selection-start="1826" selection-end="1826" vertical-scroll-proportion="0.94849783">
           <folding />
         </state>
       </provider>
