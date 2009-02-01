@@ -34,6 +34,7 @@ import java.awt.Dimension;
 import ddf.minim.AudioPlayer;
 import processing.core.PApplet;
 import napplelabs.dbssim.SignalContainer;
+import java.awt.Component;
 
 public class SimUI
     extends java.lang.Object
@@ -46,7 +47,18 @@ public class SimUI
         throw new InternalError("Stubbed method");
     }
 
-    private JComponent currentComponent = null;
+    private Component currentComponent = null;
+    public void setCurrentComponent(Component value) {
+        throw new InternalError("Stubbed method");
+    }
+
+    private Component tracePanel = null;
+    public Component getTracePanel() {
+        throw new InternalError("Stubbed method");
+    }
+    public void setTracePanel(Component value) {
+        throw new InternalError("Stubbed method");
+    }
 
     private ControlHud controlHud = null;
     public ControlHud getControlHud() {
@@ -62,10 +74,6 @@ public class SimUI
 
     public SimUI() {
         this((java.lang.Void)null, (java.lang.Void)null, (java.lang.Void)null);
-        throw new InternalError("Stubbed method");
-    }
-
-    public void setCurrentComponent(JComponent component) {
         throw new InternalError("Stubbed method");
     }
 

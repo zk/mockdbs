@@ -17,11 +17,12 @@ import ddf.minim.signals.PinkNoise;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 import ddf.minim.AudioOutput;
+import java.io.File;
 
 public class SignalContainer
     extends java.lang.Object
 {
-    private List audioPlayers = null;
+    private List recordedSignals = null;
 
     private PinkNoise pink = null;
     public PinkNoise getPink() {
@@ -86,7 +87,7 @@ public class SignalContainer
         throw new InternalError("Stubbed method");
     }
 
-    public void add(AudioPlayer player) {
+    public void add(RecordedSignal sig) {
         throw new InternalError("Stubbed method");
     }
 

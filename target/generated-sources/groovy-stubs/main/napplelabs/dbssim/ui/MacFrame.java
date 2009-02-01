@@ -90,7 +90,7 @@ public class MacFrame
         throw new InternalError("Stubbed method");
     }
 
-    public MacFrame() {
+    public MacFrame(int width, int height) {
         this((java.lang.Void)null, (java.lang.Void)null, (java.lang.Void)null);
         throw new InternalError("Stubbed method");
     }

@@ -10,6 +10,7 @@ import javax.swing.JToggleButton
 import java.awt.event.ActionListener
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
+import java.awt.BorderLayout
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,16 +20,19 @@ import javax.swing.SwingUtilities
  * To change this template use File | Settings | File Templates.
  */
 
-public class TabMonitor {
+public class TabManager {
 
     List<String> tabNames = []
     Map<String, Component> tabComponents = [:]
     Component currentComponent = new JPanel()
+    JPanel parent
 
-    public TabMonitor() {
+    public TabManager(JPanel parent) {
+        this.parent = parent
     }
 
-    public TabMonitor add(String name, Component comp) {
+
+    public TabManager add(String name, Component comp) {
         tabNames += name
         tabComponents.put(name, comp)
     }
@@ -51,7 +55,6 @@ public class TabMonitor {
 
             control.setFocusable(false);
             control.addActionListener({
-                def parent = currentComponent.parent
                 currentComponent = tabComponents[name]
                 SwingUtilities.invokeLater({
                     parent.repaint()
@@ -67,5 +70,13 @@ public class TabMonitor {
 
 		LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, controls);
     }
-    
+
+    public void load(String name) {
+        def component = tabComponents[name]
+        if(!component) return
+        
+        parent.remove(currentComponent)
+		currentComponent = component
+		parent.add currentComponent, BorderLayout.CENTER
+    }
 }

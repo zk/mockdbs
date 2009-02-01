@@ -1,8 +1,32 @@
 package napplelabs.dbssim.ui
 
-import ddf.minim.Minimimport ddf.minim.AudioOutputimport napplelabs.dbssim.NeuronSignalimport napplelabs.dbssim.TracePanelimport ddf.minim.signals.PinkNoiseimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.MacButtonFactoryimport javax.swing.AbstractButtonimport javax.swing.JButtonimport javax.swing.ImageIconimport javax.swing.JToggleButtonimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroupimport java.awt.event.ActionListenerimport javax.swing.SwingUtilitiesimport java.lang.Runnableimport javax.swing.JComponentimport javax.swing.JPanelimport javax.swing.JLabelimport com.explodingpixels.macwidgets.HudWindowimport java.awt.Dimension
-import ddf.minim.AudioPlayerimport processing.core.PApplet
-import napplelabs.dbssim.SignalContainerimport java.awt.Componentclass SimUI {
+import ddf.minim.Minim
+import ddf.minim.AudioOutput
+import napplelabs.dbssim.NeuronSignal
+import napplelabs.dbssim.TracePanel
+import ddf.minim.signals.PinkNoise
+import java.awt.BorderLayout
+import com.explodingpixels.macwidgets.MacButtonFactory
+import javax.swing.AbstractButton
+import javax.swing.JButton
+import javax.swing.ImageIcon
+import javax.swing.JToggleButton
+import javax.swing.ButtonGroup
+import com.explodingpixels.macwidgets.LabeledComponentGroup
+import java.awt.event.ActionListener
+import javax.swing.SwingUtilities
+import java.lang.Runnable
+import javax.swing.JComponent
+import javax.swing.JPanel
+import javax.swing.JLabel
+import com.explodingpixels.macwidgets.HudWindow
+import java.awt.Dimension
+import ddf.minim.AudioPlayer
+import processing.core.PApplet
+import napplelabs.dbssim.SignalContainer
+import java.awt.Component
+
+class SimUI {
 	MacFrame mf
 	Component currentComponent = new JPanel()
 	Component tracePanel = new JPanel()
@@ -66,46 +90,19 @@ import napplelabs.dbssim.SignalContainerimport java.awt.Componentclass SimUI 
 		mf.addToolbarComponentRight(playButton)
 		
 		final JPanel canvasPanel = new JPanel()
-		
-		JToggleButton control = new JToggleButton("Canvas");
-		control.putClientProperty("JButton.buttonType", "segmentedTextured");
-		control.putClientProperty("JButton.segmentPosition", "first");
-		control.setFocusable(false);
-		control.addActionListener({
-			currentComponent = canvasPanel
-			SwingUtilities.invokeLater({
-				mf.content.repaint()
-				mf.revalidate()
-			} as Runnable)
-		} as ActionListener);
-		
-		JToggleButton trace = new JToggleButton("Trace");
-		trace.putClientProperty("JButton.buttonType", "segmentedTextured");
-		trace.putClientProperty("JButton.segmentPosition", "last");
-		trace.setFocusable(false);
-		trace.addActionListener({
-			currentComponent = tracePanel
-			SwingUtilities.invokeLater({
-				mf.content.repaint()
-				mf.revalidate()
-			} as Runnable)
-		} as ActionListener);
-		
-		ButtonGroup group = new ButtonGroup();
-		group.add(control)
-		group.add(trace)
-		
-		LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, control, trace);
-		mf.addToolbarComponentCenter(viewButtons.component)
-		
-		//TracePanel panel = new TracePanel(container)
-		
+
 		tracePanel = new TracePApplet(container)
-		tracePanel.init();
+		tracePanel.init()
+
+		TabManager tabManager = new TabManager(mf.content)
+        tabManager.add("Canvas", canvasPanel)
+        tabManager.add("Trace", tracePanel)
+
+        tabManager.load("Canvas");
 		
-		currentComponent = tracePanel
-		
-		mf.content.add(tracePanel, BorderLayout.CENTER)
+
+
+        mf.addToolbarComponentCenter(tabManager.build().component)
 		
 		mf.frame.visible = true
 		
@@ -115,12 +112,6 @@ import napplelabs.dbssim.SignalContainerimport java.awt.Componentclass SimUI 
 		//controlHud.visible = true
 		//panel.start()
 		
-	}
-	
-	public void setCurrentComponent(Component component) {
-		mf.content.remove(currentComponent)
-		currentComponent = component
-		mf.content.add(currentComponent, BorderLayout.CENTER)
 	}
 	
 	public JComponent getCurrentComponent() {
