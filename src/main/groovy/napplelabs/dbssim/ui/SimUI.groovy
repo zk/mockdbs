@@ -97,7 +97,7 @@ class SimUI {
 		tracePanel = new TracePApplet(container)
 		tracePanel.init()
 
-        def canvasPanel = new CanvasPanel()
+        def canvasPanel = new CanvasPanel(minim)
 
 		TabManager tabManager = new TabManager(mf.content)
         tabManager.add("Canvas", canvasPanel)
