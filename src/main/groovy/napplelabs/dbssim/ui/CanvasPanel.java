@@ -1,10 +1,12 @@
 package napplelabs.dbssim.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,11 +15,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -46,7 +50,10 @@ public class CanvasPanel extends JPanel {
 
 	private Minim minim;
 
-	public CanvasPanel(Minim minim) {
+	private JLabel label;
+
+	public CanvasPanel(Minim minim, JLabel label) {
+		this.label = label;
 		this.minim = minim;
 		setLayout(new BorderLayout());
 		add(canvas, BorderLayout.CENTER);
@@ -97,7 +104,7 @@ public class CanvasPanel extends JPanel {
 		JButton thal = new JButton("Thalamus");
 		thal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addNeuron(new ThalamusPath(minim));
+				addNeuron(new NeuronPath(Color.blue, "/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav", minim));
 			}				
 		});
 		panel.add(thal);
@@ -105,7 +112,7 @@ public class CanvasPanel extends JPanel {
 		JButton stn = new JButton("STN");
 		stn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addNeuron(new StnPath(minim));
+				addNeuron(new NeuronPath(Color.red, "/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav", minim));
 			}
 		});
 		panel.add(stn);
@@ -114,7 +121,7 @@ public class CanvasPanel extends JPanel {
 		snr.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				addNeuron(new SnrPath(minim));
+				addNeuron(new NeuronPath(Color.green, "/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav", minim));
 			}
 		});
 		panel.add(snr);
@@ -144,6 +151,22 @@ public class CanvasPanel extends JPanel {
 				probe.setDepth((double) slider.getValue() / 1000);
 				canvas.repaint();
 				recalcDistances();
+				DecimalFormat twoPlaces = new DecimalFormat("0.00");
+				label.setText(twoPlaces.format(-probe.getDepth()) + " mm");
+				Rectangle2D rect = canvas.getCamera().getViewBounds();
+				double x = rect.getX();
+				double y = rect.getY();
+				
+				double w = rect.getWidth();
+				double h = rect.getHeight();
+				
+				double p_x = probe.getProbe().getGlobalTranslation().getX();
+				double p_y = probe.getProbe().getGlobalTranslation().getY();
+				
+				Rectangle2D new_r = new Rectangle2D.Double(p_x - w/2, p_y - h/2, w, h);
+				
+				//canvas.getCamera().animateViewToCenterBounds(new_r, true, 1);
+				canvas.getCamera().setViewBounds(new_r);
 			}
 		});
 

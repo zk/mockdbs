@@ -4,23 +4,6 @@ import edu.umd.cs.piccolo.PNode
 import java.awt.Color
 import edu.umd.cs.piccolo.nodes.PPath
 import napplelabs.dbssim.neuron.NeuronPathimport ddf.minim.Minimimport java.awt.BasicStrokeimport java.awt.geom.Point2Dimport edu.umd.cs.piccolo.nodes.PTextimport java.awt.Font
-class ThalamusPath extends NeuronPath {
-  public ThalamusPath(Minim minim) {
-    super(Color.blue, "/Users/zkim/napplelabs/dbssim/src/main/resources/Rage Against The Machine - rage against the machine - 06 - Know Your Enemy.mp3", minim)
-  }
-}
-
-class StnPath extends NeuronPath {
-  public StnPath(Minim minim) {
-    super(Color.red, "/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav", minim)
-  }
-}
-
-class SnrPath extends NeuronPath {
-  public SnrPath(Minim minim) {
-    super(Color.green, "/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav", minim)
-  }
-}
 
 class Probe extends PNode {
 	public Probe() {

@@ -55,6 +55,10 @@ public class MacFrame{
 		toolbar.addComponentToCenter(comp)
 	}
 	
+	def addToolbarComponentLeft(JComponent comp) {
+		toolbar.addComponentToLeft(comp)
+	}
+	
 	def addToolbarButton(List<JButton> buttons) {
 		
 		ButtonGroup group = new ButtonGroup();
@@ -77,6 +81,11 @@ public class MacFrame{
         //addToolbarComponentCenter(viewButtons.component)
         revalidate()
 	}
+	
+	def addBottombarComponentCenter(JComponent comp) {
+		bottombar.addComponentToCenter(comp)
+	}
+	
 	
 	public static void main(String[] args) {
 		MacFrame mf = new MacFrame();

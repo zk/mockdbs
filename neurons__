@@ -2,19 +2,6 @@
   <list>
     <napplelabs.dbssim.neuron.NeuronPathRep>
       <color>
-        <red>0</red>
-        <green>0</green>
-        <blue>255</blue>
-        <alpha>255</alpha>
-      </color>
-      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav</mediaFile>
-      <location class="java.awt.geom.Point2D$Double">
-        <x>149.156296559687</x>
-        <y>-518.6706042430462</y>
-      </location>
-    </napplelabs.dbssim.neuron.NeuronPathRep>
-    <napplelabs.dbssim.neuron.NeuronPathRep>
-      <color>
         <red>255</red>
         <green>0</green>
         <blue>0</blue>
@@ -22,8 +9,8 @@
       </color>
       <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>48.440042696381255</x>
-        <y>-274.1571471322358</y>
+        <x>-40.381741228065515</x>
+        <y>69.91448588633693</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
@@ -35,56 +22,21 @@
       </color>
       <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>-44.27360294261013</x>
-        <y>197.3131439735921</y>
+        <x>-87.55722748949846</x>
+        <y>240.17168246849485</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
-      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep/color"/>
+      <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+        <alpha>255</alpha>
+      </color>
       <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>141.07125414265573</x>
-        <y>-604.7039157066074</y>
-      </location>
-    </napplelabs.dbssim.neuron.NeuronPathRep>
-    <napplelabs.dbssim.neuron.NeuronPathRep>
-      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep/color"/>
-      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav</mediaFile>
-      <location class="java.awt.geom.Point2D$Double">
-        <x>187.92401863138156</x>
-        <y>-764.5665917980033</y>
-      </location>
-    </napplelabs.dbssim.neuron.NeuronPathRep>
-    <napplelabs.dbssim.neuron.NeuronPathRep>
-      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[2]/color"/>
-      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
-      <location class="java.awt.geom.Point2D$Double">
-        <x>118.52850025973265</x>
-        <y>-340.22120567130736</y>
-      </location>
-    </napplelabs.dbssim.neuron.NeuronPathRep>
-    <napplelabs.dbssim.neuron.NeuronPathRep>
-      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[3]/color"/>
-      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav</mediaFile>
-      <location class="java.awt.geom.Point2D$Double">
-        <x>-50.51388565140224</x>
-        <y>136.1367638786892</y>
-      </location>
-    </napplelabs.dbssim.neuron.NeuronPathRep>
-    <napplelabs.dbssim.neuron.NeuronPathRep>
-      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep/color"/>
-      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav</mediaFile>
-      <location class="java.awt.geom.Point2D$Double">
-        <x>201.99041954260412</x>
-        <y>-668.9987893152154</y>
-      </location>
-    </napplelabs.dbssim.neuron.NeuronPathRep>
-    <napplelabs.dbssim.neuron.NeuronPathRep>
-      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[2]/color"/>
-      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
-      <location class="java.awt.geom.Point2D$Double">
-        <x>94.75919774223057</x>
-        <y>-407.13689587633286</y>
+        <x>196.81666257221764</x>
+        <y>-622.7742139626431</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
@@ -96,32 +48,108 @@
       </color>
       <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>31.024171333051314</x>
-        <y>-58.087158560243125</y>
+        <x>-12.719061499187925</x>
+        <y>-6.410737685078022</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[4]/color"/>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>27.39323010435001</x>
+        <y>-75.56104274484736</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[4]/color"/>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>95.91906868857167</x>
+        <y>-282.4877549487037</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[4]/color"/>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>91.23789516925832</x>
+        <y>-360.2304966360077</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[4]/color"/>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>104.6663094542826</x>
+        <y>-446.57941097229025</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color>
+        <red>0</red>
+        <green>255</green>
+        <blue>0</blue>
+        <alpha>255</alpha>
+      </color>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>-59.57757863826585</x>
+        <y>309.33484390155263</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+        <alpha>255</alpha>
+      </color>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>259.71587043369465</x>
+        <y>-896.5589740205442</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
       <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[10]/color"/>
-      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>18.30271291016822</x>
-        <y>-143.45691658991515</y>
+        <x>234.44727450559589</x>
+        <y>-970.885775371243</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
       <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[10]/color"/>
-      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>85.3331976183333</x>
-        <y>-184.81615183537872</y>
+        <x>199.92344121678818</x>
+        <y>-809.0553068299577</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
-      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[10]/color"/>
+      <color>
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+        <alpha>255</alpha>
+      </color>
       <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>-27.94880723462001</x>
-        <y>23.002194025688002</y>
+        <x>33.7558047283421</x>
+        <y>-186.63475501900638</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+        <alpha>255</alpha>
+      </color>
+      <mediaFile>/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>207.07171527285968</x>
+        <y>-711.3543876478071</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
   </list>

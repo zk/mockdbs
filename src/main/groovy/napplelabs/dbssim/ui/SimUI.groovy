@@ -25,7 +25,7 @@ import ddf.minim.AudioPlayer
 import processing.core.PApplet
 import napplelabs.dbssim.SignalContainer
 import java.awt.Component
-
+import java.awt.Font
 class SimUI {
 	MacFrame mf
 	Component currentComponent = new JPanel()
@@ -89,22 +89,29 @@ class SimUI {
 			} as Runnable)
 		} as ActionListener)
 		
-		mf.addToolbarComponentRight(playButton)
+		
+		
+		JLabel depthLabel = new JLabel("0.00 mm")
+		depthLabel.font = new Font("Arial", Font.PLAIN, 30)
+		//mf.addToolbarComponentLeft(depthLabel)
 		
 
         //Set up tabs
 
 		tracePanel = new TracePApplet(container)
-		tracePanel.init()
+		//tracePanel.init()
 
-        def canvasPanel = new CanvasPanel(minim)
+        def canvasPanel = new CanvasPanel(minim, depthLabel)
 
 		TabManager tabManager = new TabManager(mf.content)
         tabManager.add("Canvas", canvasPanel)
         tabManager.add("Trace", tracePanel)
 
 
+        
+        mf.addBottombarComponentCenter(depthLabel)
         mf.addToolbarComponentCenter(tabManager.build().component)
+        mf.addToolbarComponentRight(playButton)
 		
 		mf.frame.visible = true
 		

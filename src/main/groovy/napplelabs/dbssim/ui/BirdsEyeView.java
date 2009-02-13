@@ -10,6 +10,7 @@ import edu.umd.cs.piccolo.PLayer;
 import edu.umd.cs.piccolo.PNode;
 import edu.umd.cs.piccolo.event.PDragSequenceEventHandler;
 import edu.umd.cs.piccolo.event.PInputEvent;
+import edu.umd.cs.piccolo.nodes.PPath;
 import edu.umd.cs.piccolo.util.PDimension;
 import edu.umd.cs.piccolo.util.PPaintContext;
 import edu.umd.cs.piccolox.nodes.P3DRect;
@@ -52,14 +53,19 @@ import edu.umd.cs.piccolox.nodes.P3DRect;
             
             
             
-            setBounds(0, 0, 200, 200);
+            setBounds(10, 10, 200, 300);
 
             // create the coverage node
-            areaVisiblePNode = new P3DRect();
+            areaVisiblePNode = PPath.createRectangle(0, 0, 100, 100);
             areaVisiblePNode.setPaint(new Color(128, 128, 255));
-            areaVisiblePNode.setTransparency(.8f);
+            areaVisiblePNode.setTransparency(.4f);
             areaVisiblePNode.setBounds(0, 0, 100, 100);
             getCamera().addChild(areaVisiblePNode);
+            
+            PPath areaVisibleBorder = PPath.createRectangle(0, 0, 200, 300);
+            areaVisibleBorder.setPaint(new Color(0, 0, 0, 0));
+            areaVisibleBorder.setStrokePaint(Color.lightGray);
+            getCamera().addChild(areaVisibleBorder);
 
             // add the drag event handler
             getCamera().addInputEventListener(new PDragSequenceEventHandler() {
