@@ -67,11 +67,8 @@ public class NeuronSignal implements AudioSignal {
 		if(counter >= spike.length + space_len) {
 			counter = 0;
 			float diff = maxRate - minRate;
-			//System.out.println(diff);
 			float rnd = (float) (Math.random() * diff + minRate);
 			space_len = (int) (44100 / rnd);
-			//System.out.println(space_len);
-			//System.out.println();
 		}
 		return next;
 	}

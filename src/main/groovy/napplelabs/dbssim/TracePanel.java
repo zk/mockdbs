@@ -48,7 +48,6 @@ public class TracePanel extends JPanel implements Runnable {
 		
 		Graphics2D g = (Graphics2D) _g;
 		if(resizeFlag) {
-			System.out.println("FILL BLACK");
 			g.setColor(Color.black);
 			g.fillRect(0, 0, getWidth(), getHeight());
 			resizeFlag = false;
@@ -71,7 +70,6 @@ public class TracePanel extends JPanel implements Runnable {
 			counter++;
 			
 			if(counter >= trace.length) {
-				System.out.println("COUNTER = 0");
 				resizeFlag = true;
 				counter = 0;
 			}

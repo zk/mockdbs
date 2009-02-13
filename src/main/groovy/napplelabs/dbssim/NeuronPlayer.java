@@ -45,7 +45,6 @@ public class NeuronPlayer {
 		
 		
 		File file = new File("/Users/zkim/Desktop/Rage Against The Machine - rage against the machine - 06 - Know Your Enemy.mp3");
-		System.out.println("Exists: " + file.exists());
 		AudioPlayer player = minim.loadFile(file.getAbsolutePath());
 		
 		player.play();

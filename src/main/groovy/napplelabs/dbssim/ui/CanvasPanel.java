@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +105,7 @@ public class CanvasPanel extends JPanel {
 		JButton thal = new JButton("Thalamus");
 		thal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addNeuron(new NeuronPath(Color.blue, "/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav", minim));
+				addNeuron(new NeuronPath(Color.blue, "./neuron_media_files/7-PD-gpi.wav", minim));
 			}				
 		});
 		panel.add(thal);
@@ -112,16 +113,15 @@ public class CanvasPanel extends JPanel {
 		JButton stn = new JButton("STN");
 		stn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addNeuron(new NeuronPath(Color.red, "/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav", minim));
+				addNeuron(new NeuronPath(Color.red, "./neuron_media_files/10-PD-STN.wav", minim));
 			}
 		});
 		panel.add(stn);
 
 		JButton snr = new JButton("SNr");
 		snr.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
-				addNeuron(new NeuronPath(Color.green, "/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav", minim));
+				addNeuron(new NeuronPath(Color.green, "./neuron_media_files/15-PD-SNr.wav", minim));
 			}
 		});
 		panel.add(snr);
@@ -216,6 +216,9 @@ public class CanvasPanel extends JPanel {
 		XStream xs = new XStream();
 
         //Write to a file in the file system
+		
+		if(! new File("./neurons").exists()) return;
+		
         try {
             ObjectInputStream is = xs.createObjectInputStream(new FileReader(new File("./neurons")));
             List<NeuronPathRep> paths = (List<NeuronPathRep>) is.readObject();

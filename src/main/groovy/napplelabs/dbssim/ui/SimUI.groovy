@@ -26,14 +26,20 @@ import processing.core.PApplet
 import napplelabs.dbssim.SignalContainer
 import java.awt.Component
 import java.awt.Font
-class SimUI {
+import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event.ChangeListenerimport javax.swing.UIManagerclass SimUI {
 	MacFrame mf
 	Component currentComponent = new JPanel()
 	Component tracePanel = new JPanel()
 	
 	ControlHud controlHud
 	
+	PinkNoise pink
+	
 	public SimUI() {
+		
+		UIManager.setLookAndFeel(
+	            UIManager.getSystemLookAndFeelClassName());
+		
 		mf = new MacFrame(1200, 800)
 		
 		Minim minim = new Minim(new PApplet());
@@ -47,30 +53,6 @@ class SimUI {
 		
 		SignalContainer container = new SignalContainer()
 		
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/10-PD-STN.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/11-PD-STN-2unit.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/12-PD-STN.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/13-PD-STN.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/14-PD-STN.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/15-PD-SNr.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/2-dystonia-gpe.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/2-PD-GPe-burster.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/3-dystonia-gpi.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/4-dystonia-gpi.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/4-PD-border.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/5-dystonia-gpi.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/5-PD-gpi.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/6-PD-gpi.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/7-PD-gpi.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/8-PD-gpi-tremor.wav")
-		container.addSignal("/Users/zkim/napplelabs/dbssim/src/main/resources/9-PD-optictract-multipleaxons.wav")
-		
-		
-		
-		
-		
-		
 		//final TracePanel panel = new TracePanel(out, player);
 		//panel.start()
 		
@@ -80,8 +62,7 @@ class SimUI {
         //Set up control button
 		AbstractButton playButton =
                 MacButtonFactory.makeUnifiedToolBarButton(
-                        new JButton("Control", new ImageIcon(SimUI.class.getResource(
-                        "/napplelabs/resources/dotmac.png"))));
+                        new JButton("Control"));
 		
 		playButton.addActionListener({
 			SwingUtilities.invokeLater({
@@ -110,18 +91,43 @@ class SimUI {
 
         
         mf.addBottombarComponentCenter(depthLabel)
-        mf.addToolbarComponentCenter(tabManager.build().component)
-        mf.addToolbarComponentRight(playButton)
+        //mf.addToolbarComponentCenter(tabManager.build().component)
+        //mf.addToolbarComponentRight(playButton)
+        
+        JPanel noisePanel = new JPanel();
+		JSlider noiseSlider = new JSlider();
+		noiseSlider.minimum = 0
+		noiseSlider.maximum = 100
+		noiseSlider.value = 0
+		
+		noisePanel.layout = new BorderLayout()
+		noisePanel.add(noiseSlider, BorderLayout.CENTER)
+		noisePanel.add(new JLabel("Noise"), BorderLayout.WEST)
+		
+		noiseSlider.addChangeListener({
+			float val = noiseSlider.value as float
+			val /= 100
+			pink.amp = val
+		} as ChangeListener)
+		
+		AudioOutput out = minim.getLineOut(Minim.MONO);
+		pink = new PinkNoise(0.0f);
+		out.addSignal(pink)
+		
+		
+		mf.addToolbarComponentRight(noisePanel)
 		
 		mf.frame.visible = true
 		
-		container.play()
+		//container.play()
 
-        tabManager.currentComponent = canvasPanel
+        
 		
 		controlHud = new ControlHud(container)
 		//controlHud.visible = true
 		//panel.start()
+		
+		tabManager.setCurrentComponent(canvasPanel)
 		
 	}
 	

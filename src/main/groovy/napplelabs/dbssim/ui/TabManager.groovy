@@ -12,14 +12,6 @@ import javax.swing.JPanel
 import javax.swing.SwingUtilities
 import java.awt.BorderLayout
 
-/**
- * Created by IntelliJ IDEA.
- * User: zkim
- * Date: Jan 31, 2009
- * Time: 6:37:14 PM
- * To change this template use File | Settings | File Templates.
- */
-
 public class TabManager {
 
     List<String> tabNames = []
@@ -79,11 +71,10 @@ public class TabManager {
     }
 
     public void setCurrentComponent(Component component) {
-        
-        
         parent.remove(currentComponent)
 		currentComponent = component
-		parent.add currentComponent, BorderLayout.CENTER
+		parent.add(currentComponent, BorderLayout.CENTER)
+		parent.revalidate()
     }
 
     public Component getCurrentComponent() {
