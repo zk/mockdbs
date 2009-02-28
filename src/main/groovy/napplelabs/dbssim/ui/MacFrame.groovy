@@ -20,7 +20,7 @@ public class MacFrame{
 	public MacFrame(int width, int height) {
 		
 		
-		frame = new JFrame("DBS Simulator")
+		frame = new JFrame("MockDBS")
 		frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 		frame.size = new Dimension(width, height)
 		
@@ -84,6 +84,10 @@ public class MacFrame{
 	
 	def addBottombarComponentCenter(JComponent comp) {
 		bottombar.addComponentToCenter(comp)
+	}
+	
+	def addBottombarComponentRight(JComponent comp) {
+		bottombar.addComponentToRight(comp)
 	}
 	
 	

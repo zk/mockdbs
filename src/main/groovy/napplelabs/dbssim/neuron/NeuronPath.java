@@ -6,6 +6,8 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
 import edu.umd.cs.piccolo.PNode;
+import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
+import edu.umd.cs.piccolo.event.PInputEvent;
 import edu.umd.cs.piccolo.nodes.PPath;
 
 public class NeuronPath extends PNode {
@@ -23,8 +25,9 @@ public class NeuronPath extends PNode {
 	}
 
 	public void init() {
-		float d = 100f;
-		setPath(PPath.createEllipse(-d/2, -d/2, d, d));
+		float d = 50f;
+		path = PPath.createEllipse(-d/2, -d/2, d, d);
+		
 
 		Color c = new Color(color.getRed(), color.getGreen(), color.getBlue(), 190);
 		getPath().setPaint(c);

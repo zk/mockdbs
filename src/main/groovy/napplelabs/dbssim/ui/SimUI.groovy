@@ -26,7 +26,7 @@ import processing.core.PApplet
 import napplelabs.dbssim.SignalContainer
 import java.awt.Component
 import java.awt.Font
-import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event.ChangeListenerimport javax.swing.UIManagerclass SimUI {
+import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event.ChangeListenerimport javax.swing.UIManagerimport com.explodingpixels.painter.Painterimport com.explodingpixels.painter.GradientPainterimport com.explodingpixels.painter.FocusStatePainterimport com.explodingpixels.swingx.EPPanelimport com.explodingpixels.macwidgets.MacColorUtilsimport java.awt.event.KeyListenerimport java.awt.event.KeyAdapterimport java.awt.event.KeyEventimport java.awt.KeyboardFocusManagerimport java.awt.KeyEventDispatcherclass SimUI {
 	MacFrame mf
 	Component currentComponent = new JPanel()
 	Component tracePanel = new JPanel()
@@ -37,8 +37,8 @@ import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event
 	
 	public SimUI() {
 		
-		UIManager.setLookAndFeel(
-	            UIManager.getSystemLookAndFeelClassName());
+		//UIManager.setLookAndFeel(
+	      //      UIManager.getSystemLookAndFeelClassName());
 		
 		mf = new MacFrame(1200, 800)
 		
@@ -94,7 +94,23 @@ import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event
         //mf.addToolbarComponentCenter(tabManager.build().component)
         //mf.addToolbarComponentRight(playButton)
         
-        JPanel noisePanel = new JPanel();
+        EPPanel noisePanel = new EPPanel()
+		
+		Painter<Component> focusedPainter =
+            new GradientPainter(
+                    MacColorUtils.OS_X_BOTTOM_BAR_ACTIVE_TOP_COLOR,
+                    MacColorUtils.OS_X_BOTTOM_BAR_ACTIVE_BOTTOM_COLOR);
+		Painter<Component> unfocusedPainter =
+            new GradientPainter(
+                    MacColorUtils.OS_X_BOTTOM_BAR_INACTIVE_TOP_COLOR,
+                    MacColorUtils.OS_X_BOTTOM_BAR_INACTIVE_BOTTOM_COLOR);
+
+		Painter<Component> painter = new FocusStatePainter(focusedPainter, focusedPainter,
+            unfocusedPainter);
+		
+		noisePanel.backgroundPainter = painter
+		
+		
 		JSlider noiseSlider = new JSlider();
 		noiseSlider.minimum = 0
 		noiseSlider.maximum = 100
@@ -115,7 +131,7 @@ import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event
 		out.addSignal(pink)
 		
 		
-		mf.addToolbarComponentRight(noisePanel)
+		mf.addBottombarComponentRight(noisePanel)
 		
 		mf.frame.visible = true
 		
@@ -129,6 +145,10 @@ import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event
 		
 		tabManager.setCurrentComponent(canvasPanel)
 		
+		//mf.getContent().addKeyListener(new SimKeyListener());
+		
+		
+		
 	}
 	
 	public JComponent getCurrentComponent() {
@@ -136,9 +156,18 @@ import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event
 	}
 	
 	public static void main(String[] args) {
+		
+		println "WORKING DIRECTORY: " + new File(".").absolutePath
+		
 		SwingUtilities.invokeLater({
 			new SimUI()
 		} as Runnable)
 		
+	}
+}
+
+class SimKeyListener extends KeyAdapter {
+	public void keyPressed(KeyEvent evt) {
+		println evt.keyCode
 	}
 }

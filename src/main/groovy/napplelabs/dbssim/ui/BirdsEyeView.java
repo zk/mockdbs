@@ -53,7 +53,7 @@ import edu.umd.cs.piccolox.nodes.P3DRect;
             
             
             
-            setBounds(10, 10, 200, 300);
+            setBounds(0, 0, 200, 300);
 
             // create the coverage node
             areaVisiblePNode = PPath.createRectangle(0, 0, 100, 100);

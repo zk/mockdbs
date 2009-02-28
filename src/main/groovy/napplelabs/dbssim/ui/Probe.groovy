@@ -6,6 +6,9 @@ import edu.umd.cs.piccolo.nodes.PPath
 import napplelabs.dbssim.neuron.NeuronPathimport ddf.minim.Minimimport java.awt.BasicStrokeimport java.awt.geom.Point2Dimport edu.umd.cs.piccolo.nodes.PTextimport java.awt.Font
 
 class Probe extends PNode {
+	
+	private double depth;
+	
 	public Probe() {
 		init()
 	}
@@ -38,10 +41,12 @@ class Probe extends PNode {
 	PPath probe
 	
 	public void setDepth(double depth) {
-		probe.offset = new Point2D.Double(0.0, -depth * 1000.0)  
+		
+		this.depth = depth
+		probe.offset = new Point2D.Double(0.0, -depth * 100.0)  
 	}
 	
 	public double getDepth() {
-		return probe.offset.y / 100
+		return this.depth
 	}
 }
