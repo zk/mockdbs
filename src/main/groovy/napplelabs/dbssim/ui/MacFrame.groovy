@@ -1,4 +1,22 @@
+/*
+	MockDBS: Deep Brain Stimulation Simulator
+    Copyright (C) 2009 Zachary Kim
 
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+ 
 package napplelabs.dbssim.ui
 
 import javax.swing.JFrameimport java.awt.Dimensionimport javax.swing.SwingUtilitiesimport java.lang.Runnableimport com.explodingpixels.macwidgets.MacWidgetFactoryimport com.explodingpixels.macwidgets.TriAreaComponentimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.BottomBarSizeimport javax.swing.JLabelimport javax.swing.JPanelimport javax.swing.JButtonimport ddf.minim.Minimimport napplelabs.dbssim.NeuronSignalimport ddf.minim.signals.PinkNoiseimport ddf.minim.AudioOutputimport javax.swing.AbstractButtonimport javax.swing.JComponentimport java.util.Listimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroup
@@ -39,8 +57,7 @@ public class MacFrame{
 	
 	boolean visible = false
 	
-	public MacFrame(int width, int height) {
-		
+	public MacFrame(int width, int height) {	
 		frame = new JFrame("MockDBS")
 		frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 		frame.size = new Dimension(width, height)
