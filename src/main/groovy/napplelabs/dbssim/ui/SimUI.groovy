@@ -3,7 +3,6 @@ package napplelabs.dbssim.ui
 import ddf.minim.Minim
 import ddf.minim.AudioOutput
 import napplelabs.dbssim.NeuronSignal
-import napplelabs.dbssim.TracePanel
 import ddf.minim.signals.PinkNoise
 import java.awt.BorderLayout
 import com.explodingpixels.macwidgets.MacButtonFactory
@@ -23,7 +22,6 @@ import com.explodingpixels.macwidgets.HudWindow
 import java.awt.Dimension
 import ddf.minim.AudioPlayer
 import processing.core.PApplet
-import napplelabs.dbssim.SignalContainer
 import java.awt.Component
 import java.awt.Font
 import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event.ChangeListenerimport javax.swing.UIManagerimport com.explodingpixels.painter.Painterimport com.explodingpixels.painter.GradientPainterimport com.explodingpixels.painter.FocusStatePainterimport com.explodingpixels.swingx.EPPanelimport com.explodingpixels.macwidgets.MacColorUtilsimport java.awt.event.KeyListenerimport java.awt.event.KeyAdapterimport java.awt.event.KeyEventimport java.awt.KeyboardFocusManagerimport java.awt.KeyEventDispatcher
@@ -59,8 +57,6 @@ import napplelabs.dbssim.canvasviews.Probe
 	Component currentComponent = new JPanel()
 	Component tracePanel = new JPanel()
 	
-	ControlHud controlHud
-	
 	PinkNoise pink
 	
 	public SimUI() {
@@ -75,6 +71,29 @@ import napplelabs.dbssim.canvasviews.Probe
 		depthLabel.font = new Font("Arial", Font.PLAIN, 30)
 		mf.addBottombarComponentCenter(depthLabel)
 		
+		EPPanel noisePanel = createNoisePanel()
+		mf.addBottombarComponentRight(noisePanel)
+		
+		Minim minim = new Minim(new PApplet());
+		def canvasPanel = new CanvasPanel(minim, depthLabel)
+		mf.content.add(canvasPanel, BorderLayout.CENTER)
+		
+		double one = (float) (1.1*Math.PI / 100);
+		int sin_size = 100;
+		float[] sin = new float[sin_size];
+		for(int i=0; i < sin_size; i++) {
+			sin[i] = (float) Math.sin(one * i);
+		}
+		
+
+		AudioOutput out = minim.getLineOut(Minim.MONO);
+		pink = new PinkNoise(0.0f);
+		out.addSignal(pink)
+		
+		mf.frame.visible = true
+	}
+	
+	private EPPanel createNoisePanel() {
 		EPPanel noisePanel = new EPPanel()
 		noisePanel.layout = new BorderLayout()
 		Painter<Component> focusedPainter =
@@ -103,33 +122,8 @@ import napplelabs.dbssim.canvasviews.Probe
 		
 		noisePanel.add(noiseSlider, BorderLayout.CENTER)
 		noisePanel.add(new JLabel("Noise"), BorderLayout.WEST)
-		mf.addBottombarComponentRight(noisePanel)
 		
-		Minim minim = new Minim(new PApplet());
-		def canvasPanel = new CanvasPanel(minim, depthLabel)
-		mf.content.add(canvasPanel, BorderLayout.CENTER)
-		
-		double one = (float) (1.1*Math.PI / 100);
-		int sin_size = 100;
-		float[] sin = new float[sin_size];
-		for(int i=0; i < sin_size; i++) {
-			sin[i] = (float) Math.sin(one * i);
-		}
-		
-		SignalContainer container = new SignalContainer()
-
-		AudioOutput out = minim.getLineOut(Minim.MONO);
-		pink = new PinkNoise(0.0f);
-		out.addSignal(pink)
-		
-		mf.frame.visible = true
-		
-		
-		
-		//mf.getContent().addKeyListener(new SimKeyListener());
-		
-		
-		
+		return noisePanel;
 	}
 	
 	public JComponent getCurrentComponent() {

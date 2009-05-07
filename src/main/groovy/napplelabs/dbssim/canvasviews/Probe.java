@@ -35,7 +35,7 @@ public class Probe extends PNode {
 		addChild(path);
 		addChild(getProbe());
 
-		for (int i = 10; i > -20; i++) {
+		for (int i = 10; i > -20; i--) {
 			PText t = new PText(-i + "mm");
 			t.setFont(new Font("Arial", Font.PLAIN, 16));
 			t.setOffset(new Point2D.Double(30, i * 100));

@@ -1,7 +1,7 @@
 
 package napplelabs.dbssim.ui
 
-import javax.swing.JFrameimport java.awt.Dimensionimport javax.swing.SwingUtilitiesimport java.lang.Runnableimport com.explodingpixels.macwidgets.MacWidgetFactoryimport com.explodingpixels.macwidgets.TriAreaComponentimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.BottomBarSizeimport javax.swing.JLabelimport javax.swing.JPanelimport javax.swing.JButtonimport ddf.minim.Minimimport napplelabs.dbssim.NeuronSignalimport ddf.minim.signals.PinkNoiseimport napplelabs.dbssim.TracePanelimport ddf.minim.AudioOutputimport javax.swing.AbstractButtonimport javax.swing.JComponentimport java.util.Listimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroup
+import javax.swing.JFrameimport java.awt.Dimensionimport javax.swing.SwingUtilitiesimport java.lang.Runnableimport com.explodingpixels.macwidgets.MacWidgetFactoryimport com.explodingpixels.macwidgets.TriAreaComponentimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.BottomBarSizeimport javax.swing.JLabelimport javax.swing.JPanelimport javax.swing.JButtonimport ddf.minim.Minimimport napplelabs.dbssim.NeuronSignalimport ddf.minim.signals.PinkNoiseimport ddf.minim.AudioOutputimport javax.swing.AbstractButtonimport javax.swing.JComponentimport java.util.Listimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroup
 /**
  * 
  * MacFrame takes responsibility for creating the wrapping jframe,
