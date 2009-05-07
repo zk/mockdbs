@@ -19,58 +19,51 @@
 
 package napplelabs.dbssim.ui;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Event;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.SliderUI;
+
+import napplelabs.dbssim.canvasviews.NeuronPath;
+import napplelabs.dbssim.canvasviews.Probe;
+import napplelabs.dbssim.neuron.NeuronPathRep;
+import napplelabs.dbssim.neuron.NeuronType;
+import net.miginfocom.swing.MigLayout;
 
 import com.thoughtworks.xstream.XStream;
 
 import ddf.minim.Minim;
-
-import net.miginfocom.swing.MigLayout;
-
 import edu.umd.cs.piccolo.PCanvas;
 import edu.umd.cs.piccolo.PLayer;
 import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
 import edu.umd.cs.piccolo.event.PInputEvent;
-import edu.umd.cs.piccolo.event.PInputEventListener;
 import edu.umd.cs.piccolo.util.PPaintContext;
-
-import napplelabs.dbssim.canvasviews.NeuronPath;
-import napplelabs.dbssim.neuron.NeuronPathRep;
-
-import napplelabs.dbssim.canvasviews.Probe;
 
 public class CanvasPanel extends JPanel {
 
@@ -86,7 +79,11 @@ public class CanvasPanel extends JPanel {
 
 	private JSlider slider;
 
-	public CanvasPanel(Minim minim, JLabel label) {
+	private final List<NeuronType> neuronTypes;
+
+	public CanvasPanel(final List<NeuronType> neuronTypes, final Minim minim,
+			final JLabel label) {
+		this.neuronTypes = neuronTypes;
 		this.label = label;
 		this.minim = minim;
 		setLayout(new BorderLayout());
@@ -131,28 +128,29 @@ public class CanvasPanel extends JPanel {
 
 		KeyboardFocusManager.getCurrentKeyboardFocusManager()
 				.addKeyEventDispatcher(new KeyEventDispatcher() {
-					public boolean dispatchKeyEvent(KeyEvent e) {
+					public boolean dispatchKeyEvent(final KeyEvent e) {
 						boolean discardEvent = false;
-						
+
 						if (e.getID() == KeyEvent.KEY_PRESSED) {
-							
-							if(e.getKeyCode() == 40) {
+
+							if (e.getKeyCode() == 40) {
 								updateProbeDepth(probe.getDepth() - 0.01);
-								
-								slider.setValue((int) (probe.getDepth() * 1000));
-								
+
+								slider
+										.setValue((int) (probe.getDepth() * 1000));
+
 								discardEvent = true;
 							}
-							
-							if(e.getKeyCode() == 38) {
-								
+
+							if (e.getKeyCode() == 38) {
+
 								updateProbeDepth(probe.getDepth() + 0.01);
-								
-								slider.setValue((int) (probe.getDepth() * 1000));
+
+								slider
+										.setValue((int) (probe.getDepth() * 1000));
 								discardEvent = true;
 							}
-							
-							
+
 						}
 						return discardEvent;
 					}
@@ -161,35 +159,43 @@ public class CanvasPanel extends JPanel {
 	}
 
 	private Component createFeaturePanel() {
-
+		
 		JPanel panel = new JPanel();
 		panel.setLayout(new MigLayout("wrap 2"));
-		JButton thal = new JButton("Thalamus");
-		thal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				addNeuron(new NeuronPath(Color.blue,
-						"./neuron_media_files/thalamus.wav", minim));
-			}
-		});
-		panel.add(thal, "wrap");
-
-		JButton stn = new JButton("STN");
-		stn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				addNeuron(new NeuronPath(Color.red,
-						"./neuron_media_files/stn.wav", minim));
-			}
-		});
-		panel.add(stn, "wrap");
-
-		JButton snr = new JButton("SNr");
-		snr.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				addNeuron(new NeuronPath(Color.green,
-						"./neuron_media_files/snr.wav", minim));
-			}
-		});
-		panel.add(snr, "wrap");
+		
+		for(final NeuronType nt: neuronTypes) {
+			JPanel np = new JPanel();
+			np.setLayout(new MigLayout("wrap 2, ins 0"));
+			
+			JButton button = new JButton(nt.getName());
+			
+			JPanel neuronPreviewPanel = new JPanel() {
+				@Override
+				public void paint(final Graphics _g) {
+					Graphics2D g = (Graphics2D) _g;
+					
+					g.setPaint(nt.getColor());
+					g.setStroke(new BasicStroke(0.75f));
+					g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g.fillOval(2, 2, getWidth()-4, getHeight()-4);
+					g.setColor(Color.BLACK);
+					g.drawOval(2, 2, getWidth()-4, getHeight()-4);
+				}
+			};
+			
+			np.add(neuronPreviewPanel, "width 30, height 30");
+			np.add(button);
+			
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					addNeuron(new NeuronPath(nt, minim));
+				}
+			});
+			
+			//button.setFont(new Font("Arial", Font.PLAIN, 8));
+			
+			panel.add(np, "wrap");
+		}
 
 		/*
 		 * JButton importButton = new JButton("Import Media");
@@ -219,7 +225,7 @@ public class CanvasPanel extends JPanel {
 
 		path.getPath().addInputEventListener(new PBasicInputEventHandler() {
 			@Override
-			public void mouseClicked(PInputEvent evt) {
+			public void mouseClicked(final PInputEvent evt) {
 				if (evt.isLeftMouseButton() && evt.getClickCount() == 2) {
 					path.removeFromParent();
 					path.setPlaying(false);
@@ -241,7 +247,7 @@ public class CanvasPanel extends JPanel {
 		slider.setValue(20000);
 		slider.setFocusable(false);
 		slider.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
+			public void stateChanged(final ChangeEvent e) {
 				double depth = (double) slider.getValue() / 1000;
 				updateProbeDepth(depth);
 			}
@@ -252,15 +258,15 @@ public class CanvasPanel extends JPanel {
 
 	}
 
-	private void updateProbeDepth(double depth) {
+	private void updateProbeDepth(final double depth) {
 		probe.setDepth(depth);
 		canvas.repaint();
 		recalcDistances();
 		DecimalFormat twoPlaces = new DecimalFormat("0.00");
 		label.setText(twoPlaces.format(probe.getDepth()) + " mm");
 		Rectangle2D rect = canvas.getCamera().getViewBounds();
-		double x = rect.getX();
-		double y = rect.getY();
+		// double x = rect.getX();
+		// double y = rect.getY();
 
 		double w = rect.getWidth();
 		double h = rect.getHeight();
@@ -278,7 +284,7 @@ public class CanvasPanel extends JPanel {
 	public void recalcDistances() {
 		Point2D p = probe.getProbe().getGlobalTranslation();
 		for (NeuronPath np : neurons) {
-			
+
 			double diameter = np.getPath().getWidth();
 			float diff = (float) p
 					.distance(np.getPath().getGlobalTranslation());

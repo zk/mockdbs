@@ -21,9 +21,9 @@ package napplelabs.dbssim.canvasviews;
 
 import java.awt.Color;
 
+import napplelabs.dbssim.neuron.NeuronType;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
-
 import edu.umd.cs.piccolo.PNode;
 import edu.umd.cs.piccolo.nodes.PPath;
 
@@ -34,10 +34,17 @@ public class NeuronPath extends PNode {
 	private AudioPlayer player;
 	private PPath path;
 
-	public NeuronPath(Color color, String mediaFile, Minim minim) {
+	public NeuronPath(final Color color, final String mediaFile, final Minim minim) {
 		this.color = color;
 		this.mediaFile = mediaFile;
 		this.minim = minim;
+		init();
+	}
+
+	public NeuronPath(final NeuronType nt, final Minim minim) {
+		this.mediaFile = nt.getMediaPath();
+		this.minim = minim;
+		this.color = nt.getColor();
 		init();
 	}
 
@@ -58,11 +65,11 @@ public class NeuronPath extends PNode {
 		//player.play();
 	}
 	
-	public void setLevel(float level) {
+	public void setLevel(final float level) {
 		float gain = (level * (80 + 14)) - 80;
 		player.setGain(gain);
 	}
-	public void setPlaying(boolean playing) {
+	public void setPlaying(final boolean playing) {
 		if(playing)
 			player.play();
 		else
@@ -72,7 +79,7 @@ public class NeuronPath extends PNode {
 		return player.isPlaying();
 	}
 
-	public void setPath(PPath path) {
+	public void setPath(final PPath path) {
 		this.path = path;
 	}
 

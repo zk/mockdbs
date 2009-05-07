@@ -9,8 +9,8 @@
       </color>
       <mediaFile>./neuron_media_files/thalamus.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>46.468766858290735</x>
-        <y>-187.97748109104162</y>
+        <x>-5.531233141709265</x>
+        <y>8.022518908958375</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
@@ -22,8 +22,21 @@
       </color>
       <mediaFile>./neuron_media_files/stn.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>69.30791570133613</x>
-        <y>-184.2738353327099</y>
+        <x>-31.692084298663872</x>
+        <y>104.7261646672901</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+        <alpha>255</alpha>
+      </color>
+      <mediaFile>./neuron_media_files/thalamus.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>8.0</x>
+        <y>-15.5</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
   </list>
