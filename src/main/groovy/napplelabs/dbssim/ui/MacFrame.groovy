@@ -1,138 +1,0 @@
-/*
-	MockDBS: Deep Brain Stimulation Simulator
-    Copyright (C) 2009 Zachary Kim
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
- 
-package napplelabs.dbssim.ui
-
-import javax.swing.JFrameimport java.awt.Dimensionimport javax.swing.SwingUtilitiesimport java.lang.Runnableimport com.explodingpixels.macwidgets.MacWidgetFactoryimport com.explodingpixels.macwidgets.TriAreaComponentimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.BottomBarSizeimport javax.swing.JLabelimport javax.swing.JPanelimport javax.swing.JButtonimport ddf.minim.Minimimport napplelabs.dbssim.NeuronSignalimport ddf.minim.signals.PinkNoiseimport ddf.minim.AudioOutputimport javax.swing.AbstractButtonimport javax.swing.JComponentimport java.util.Listimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroup
-/**
- * 
- * MacFrame takes responsibility for creating the wrapping jframe,
- * a navigation bar, and a bottom bar.  It also provides a convience method, addToolbarButton, 
- * which allows you to create a center toolbar button group w/o having to concern yourself
- * with the setup & teardown.
- * 
- * |-----------------------------|
- * |			a				 |
- * |-----------------------------|
- * |						     |
- * |						     |
- * |						     |
- * |						     |
- * |						     |
- * |						     |
- * |						     |
- * |						     |
- * |						     |
- * |-----------------------------|
- * |			b				 |
- * |-----------------------------|
- * 
- * 
- * @author zkim
- *
- */
-public class MacFrame{
-	
-	JFrame frame
-	TriAreaComponent toolbar
-	TriAreaComponent bottombar
-	JPanel content;
-	List<JButton> toolbarButtons = []
-	
-	boolean visible = false
-	
-	public MacFrame(int width, int height) {	
-		frame = new JFrame("MockDBS")
-		frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-		frame.size = new Dimension(width, height)
-		
-		toolbar = MacWidgetFactory.createUnifiedToolBar()
-		frame.contentPane.add(toolbar.component, BorderLayout.NORTH)
-		
-		bottombar = MacWidgetFactory.createBottomBar(BottomBarSize.LARGE);
-		frame.contentPane.add(bottombar.component, BorderLayout.SOUTH)
-		content = new JPanel()
-		content.layout = new BorderLayout()
-		frame.contentPane.add(content, BorderLayout.CENTER)
-		
-	}
-	
-	public void setVisisble(boolean vis) {
-		frame.visible = vis
-	}
-	
-	public boolean getVisible() {
-		return frame.visible
-	}
-	
-	def revalidate() {
-		frame.contentPane.revalidate()
-	}
-	
-	def addToolbarComponentRight(JComponent comp) {
-		toolbar.addComponentToRight(comp)
-	}
-	
-	def addToolbarComponentCenter(JComponent comp) {
-		toolbar.addComponentToCenter(comp)
-	}
-	
-	def addToolbarComponentLeft(JComponent comp) {
-		toolbar.addComponentToLeft(comp)
-	}
-	
-	def addToolbarButton(List<JButton> buttons) {
-		
-		ButtonGroup group = new ButtonGroup();
-		
-		buttons.eachWithIndex {button, i ->
-			button.putClientProperty("JButton.buttonType", "segmentedTextured");
-			if(i == 0) {
-				button.putClientProperty("JButton.segmentPosition", "first");
-			} else if(i == buttons.size()-1) {
-				button.putClientProperty("JButton.segmentPosition", "last");
-			} else {
-				button.putClientProperty("JButton.segmentPosition", "middle");
-			}
-			
-			group.add(button)
-			button.setFocusable(false);
-		};
-		
-		LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, buttons);
-		//addToolbarComponentCenter(viewButtons.component)
-		revalidate()
-	}
-	
-	def addBottombarComponentCenter(JComponent comp) {
-		bottombar.addComponentToCenter(comp)
-	}
-	
-	def addBottombarComponentRight(JComponent comp) {
-		bottombar.addComponentToRight(comp)
-	}
-	
-	
-	public static void main(String[] args) {
-		MacFrame mf = new MacFrame();
-		
-		
-		
-	}
-}

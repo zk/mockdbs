@@ -9,8 +9,8 @@
       </color>
       <mediaFile>./neuron_media_files/thalamus.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>45.0</x>
-        <y>-113.5</y>
+        <x>54.82310182985435</x>
+        <y>-166.9813321847627</y>
       </location>
     </napplelabs.dbssim.neuron.NeuronPathRep>
   </list>
