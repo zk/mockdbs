@@ -51,29 +51,29 @@ public class MacFrame {
 	private List<JButton> toolbarButtons = new ArrayList<JButton>();
 	
 	public MacFrame(int width, int height) {
-		frame = new JFrame("MockDBS");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFrame(new JFrame("MockDBS"));
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		frame.setSize(width, height);
-		frame.setLocationRelativeTo(null);
+		getFrame().setSize(width, height);
+		getFrame().setLocationRelativeTo(null);
 		
 		toolbar = MacWidgetFactory.createUnifiedToolBar();
-		frame.getContentPane().add(toolbar.getComponent(), BorderLayout.NORTH);
+		getFrame().getContentPane().add(toolbar.getComponent(), BorderLayout.NORTH);
 		
 		bottombar = MacWidgetFactory.createBottomBar(BottomBarSize.LARGE);
-		frame.getContentPane().add(bottombar.getComponent(), BorderLayout.SOUTH);
-		content = new JPanel();
-		content.setLayout(new BorderLayout());
-		frame.getContentPane().add(content, BorderLayout.CENTER);
+		getFrame().getContentPane().add(bottombar.getComponent(), BorderLayout.SOUTH);
+		setContent(new JPanel());
+		getContent().setLayout(new BorderLayout());
+		getFrame().getContentPane().add(getContent(), BorderLayout.CENTER);
 		
 	}
 	
 	public void setVisisble(boolean vis) {
-		frame.setVisible(vis);
+		getFrame().setVisible(vis);
 	}
 	
 	public boolean getVisible() {
-		return frame.isVisible();
+		return getFrame().isVisible();
 	}
 	
 	public void addToolbarComponentRight(JComponent comp) {
@@ -117,5 +117,21 @@ public class MacFrame {
 	
 	public void addBottombarComponentRight(JComponent comp) {
 		bottombar.addComponentToRight(comp);
+	}
+
+	public void setContent(JPanel content) {
+		this.content = content;
+	}
+
+	public JPanel getContent() {
+		return content;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 }
