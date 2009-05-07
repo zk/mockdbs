@@ -1,9 +1,31 @@
-/**
- * 
- */
+
 package napplelabs.dbssim.ui
 
-import javax.swing.JFrameimport java.awt.Dimensionimport javax.swing.SwingUtilitiesimport java.lang.Runnableimport com.explodingpixels.macwidgets.MacWidgetFactoryimport com.explodingpixels.macwidgets.TriAreaComponentimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.BottomBarSizeimport javax.swing.JLabelimport javax.swing.JPanelimport javax.swing.JButtonimport ddf.minim.Minimimport napplelabs.dbssim.NeuronSignalimport ddf.minim.signals.PinkNoiseimport napplelabs.dbssim.TracePanelimport ddf.minim.AudioOutputimport javax.swing.AbstractButtonimport javax.swing.JComponentimport java.util.Listimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroup/**
+import javax.swing.JFrameimport java.awt.Dimensionimport javax.swing.SwingUtilitiesimport java.lang.Runnableimport com.explodingpixels.macwidgets.MacWidgetFactoryimport com.explodingpixels.macwidgets.TriAreaComponentimport java.awt.BorderLayoutimport com.explodingpixels.macwidgets.BottomBarSizeimport javax.swing.JLabelimport javax.swing.JPanelimport javax.swing.JButtonimport ddf.minim.Minimimport napplelabs.dbssim.NeuronSignalimport ddf.minim.signals.PinkNoiseimport napplelabs.dbssim.TracePanelimport ddf.minim.AudioOutputimport javax.swing.AbstractButtonimport javax.swing.JComponentimport java.util.Listimport javax.swing.ButtonGroupimport com.explodingpixels.macwidgets.LabeledComponentGroup
+/**
+ * 
+ * MacFrame takes responsibility for creating the wrapping jframe,
+ * a navigation bar, and a bottom bar.  It also provides a convience method, addToolbarButton, 
+ * which allows you to create a center toolbar button group w/o having to concern yourself
+ * with the setup & teardown.
+ * 
+ * |-----------------------------|
+ * |			a				 |
+ * |-----------------------------|
+ * |						     |
+ * |						     |
+ * |						     |
+ * |						     |
+ * |						     |
+ * |						     |
+ * |						     |
+ * |						     |
+ * |						     |
+ * |-----------------------------|
+ * |			b				 |
+ * |-----------------------------|
+ * 
+ * 
  * @author zkim
  *
  */
@@ -18,7 +40,6 @@ public class MacFrame{
 	boolean visible = false
 	
 	public MacFrame(int width, int height) {
-		
 		
 		frame = new JFrame("MockDBS")
 		frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
@@ -76,10 +97,10 @@ public class MacFrame{
 			group.add(button)
 			button.setFocusable(false);
 		};
-		        
-        LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, buttons);
-        //addToolbarComponentCenter(viewButtons.component)
-        revalidate()
+		
+		LabeledComponentGroup viewButtons = new LabeledComponentGroup(null, buttons);
+		//addToolbarComponentCenter(viewButtons.component)
+		revalidate()
 	}
 	
 	def addBottombarComponentCenter(JComponent comp) {

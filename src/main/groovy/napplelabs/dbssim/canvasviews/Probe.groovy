@@ -1,9 +1,9 @@
-package napplelabs.dbssim.ui
+package napplelabs.dbssim.canvasviews
 
 import edu.umd.cs.piccolo.PNode
 import java.awt.Color
 import edu.umd.cs.piccolo.nodes.PPath
-import napplelabs.dbssim.neuron.NeuronPathimport ddf.minim.Minimimport java.awt.BasicStrokeimport java.awt.geom.Point2Dimport edu.umd.cs.piccolo.nodes.PTextimport java.awt.Font
+import napplelabs.dbssim.canvasviews.NeuronPathimport ddf.minim.Minimimport java.awt.BasicStrokeimport java.awt.geom.Point2Dimport edu.umd.cs.piccolo.nodes.PTextimport java.awt.Font
 
 class Probe extends PNode {
 	

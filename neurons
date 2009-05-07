@@ -1,0 +1,17 @@
+<object-stream>
+  <list>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+        <alpha>255</alpha>
+      </color>
+      <mediaFile>./neuron_media_files/thalamus.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>65.0</x>
+        <y>-102.5</y>
+      </location>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+  </list>
+</object-stream>

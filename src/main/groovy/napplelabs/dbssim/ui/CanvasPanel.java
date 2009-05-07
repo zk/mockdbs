@@ -48,8 +48,10 @@ import edu.umd.cs.piccolo.event.PInputEvent;
 import edu.umd.cs.piccolo.event.PInputEventListener;
 import edu.umd.cs.piccolo.util.PPaintContext;
 
-import napplelabs.dbssim.neuron.NeuronPath;
+import napplelabs.dbssim.canvasviews.NeuronPath;
 import napplelabs.dbssim.neuron.NeuronPathRep;
+
+import napplelabs.dbssim.canvasviews.Probe;
 
 public class CanvasPanel extends JPanel {
 

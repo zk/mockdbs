@@ -1,6 +1,6 @@
 package napplelabs.dbssim.ui;
 
-import napplelabs.dbssim.neuron.NeuronPath;
+import napplelabs.dbssim.canvasviews.NeuronPath;
 import edu.umd.cs.piccolo.PNode;
 import edu.umd.cs.piccolo.event.PDragSequenceEventHandler;
 import edu.umd.cs.piccolo.event.PInputEvent;

@@ -26,7 +26,35 @@ import processing.core.PApplet
 import napplelabs.dbssim.SignalContainer
 import java.awt.Component
 import java.awt.Font
-import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event.ChangeListenerimport javax.swing.UIManagerimport com.explodingpixels.painter.Painterimport com.explodingpixels.painter.GradientPainterimport com.explodingpixels.painter.FocusStatePainterimport com.explodingpixels.swingx.EPPanelimport com.explodingpixels.macwidgets.MacColorUtilsimport java.awt.event.KeyListenerimport java.awt.event.KeyAdapterimport java.awt.event.KeyEventimport java.awt.KeyboardFocusManagerimport java.awt.KeyEventDispatcherclass SimUI {
+import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event.ChangeListenerimport javax.swing.UIManagerimport com.explodingpixels.painter.Painterimport com.explodingpixels.painter.GradientPainterimport com.explodingpixels.painter.FocusStatePainterimport com.explodingpixels.swingx.EPPanelimport com.explodingpixels.macwidgets.MacColorUtilsimport java.awt.event.KeyListenerimport java.awt.event.KeyAdapterimport java.awt.event.KeyEventimport java.awt.KeyboardFocusManagerimport java.awt.KeyEventDispatcher
+import napplelabs.dbssim.canvasviews.Probe
+
+/**
+ * Responsible for initializing the program and creating the main UI frame.
+ * 
+ * The layout looks something like this:
+ * 
+ * |------------------------|----|
+ * |			a				 |
+ * |------------------------|----|
+ * |						|	 |
+ * |						|	 |
+ * |						|	 |
+ * |						|	 |
+ * |			b			|  c |
+ * |						|	 |
+ * |						|	 |
+ * |						|	 |
+ * |------------------------|----|
+ * |			d				 |
+ * |------------------------|----|
+ * 
+ * Where:
+ * a = Top Bar (see MacFrame)
+ * b = CanvasPanel
+ * c = Control Panel
+ * d = Bottom Bar (see MacFrame)
+ */class SimUI {
 	MacFrame mf
 	Component currentComponent = new JPanel()
 	Component tracePanel = new JPanel()
@@ -37,65 +65,18 @@ import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event
 	
 	public SimUI() {
 		
-		//UIManager.setLookAndFeel(
-	      //      UIManager.getSystemLookAndFeelClassName());
 		
 		mf = new MacFrame(1200, 800)
 		
-		Minim minim = new Minim(new PApplet());
+		//Top bar setup
 		
-		double one = (float) (1.1*Math.PI / 100);
-		int sin_size = 100;
-		float[] sin = new float[sin_size];
-		for(int i=0; i < sin_size; i++) {
-			sin[i] = (float) Math.sin(one * i);
-		}
-		
-		SignalContainer container = new SignalContainer()
-		
-		//final TracePanel panel = new TracePanel(out, player);
-		//panel.start()
-		
-		//mf.content.add(panel, BorderLayout.CENTER)
-
-
-        //Set up control button
-		AbstractButton playButton =
-                MacButtonFactory.makeUnifiedToolBarButton(
-                        new JButton("Control"));
-		
-		playButton.addActionListener({
-			SwingUtilities.invokeLater({
-				controlHud.visible = true
-			} as Runnable)
-		} as ActionListener)
-		
-		
-		
+		//Bottom bar setup
 		JLabel depthLabel = new JLabel("0.00 mm")
 		depthLabel.font = new Font("Arial", Font.PLAIN, 30)
-		//mf.addToolbarComponentLeft(depthLabel)
+		mf.addBottombarComponentCenter(depthLabel)
 		
-
-        //Set up tabs
-
-		tracePanel = new TracePApplet(container)
-		//tracePanel.init()
-
-        def canvasPanel = new CanvasPanel(minim, depthLabel)
-
-		TabManager tabManager = new TabManager(mf.content)
-        tabManager.add("Canvas", canvasPanel)
-        tabManager.add("Trace", tracePanel)
-
-
-        
-        mf.addBottombarComponentCenter(depthLabel)
-        //mf.addToolbarComponentCenter(tabManager.build().component)
-        //mf.addToolbarComponentRight(playButton)
-        
-        EPPanel noisePanel = new EPPanel()
-		
+		EPPanel noisePanel = new EPPanel()
+		noisePanel.layout = new BorderLayout()
 		Painter<Component> focusedPainter =
             new GradientPainter(
                     MacColorUtils.OS_X_BOTTOM_BAR_ACTIVE_TOP_COLOR,
@@ -107,43 +88,43 @@ import javax.swing.JCheckBoximport javax.swing.JSliderimport javax.swing.event
 
 		Painter<Component> painter = new FocusStatePainter(focusedPainter, focusedPainter,
             unfocusedPainter);
-		
 		noisePanel.backgroundPainter = painter
-		
 		
 		JSlider noiseSlider = new JSlider();
 		noiseSlider.minimum = 0
 		noiseSlider.maximum = 100
 		noiseSlider.value = 0
-		
-		noisePanel.layout = new BorderLayout()
-		noisePanel.add(noiseSlider, BorderLayout.CENTER)
-		noisePanel.add(new JLabel("Noise"), BorderLayout.WEST)
-		
 		noiseSlider.addChangeListener({
 			float val = noiseSlider.value as float
 			val /= 100
 			pink.amp = val
 		} as ChangeListener)
 		
+		
+		noisePanel.add(noiseSlider, BorderLayout.CENTER)
+		noisePanel.add(new JLabel("Noise"), BorderLayout.WEST)
+		mf.addBottombarComponentRight(noisePanel)
+		
+		Minim minim = new Minim(new PApplet());
+		def canvasPanel = new CanvasPanel(minim, depthLabel)
+		mf.content.add(canvasPanel, BorderLayout.CENTER)
+		
+		double one = (float) (1.1*Math.PI / 100);
+		int sin_size = 100;
+		float[] sin = new float[sin_size];
+		for(int i=0; i < sin_size; i++) {
+			sin[i] = (float) Math.sin(one * i);
+		}
+		
+		SignalContainer container = new SignalContainer()
+
 		AudioOutput out = minim.getLineOut(Minim.MONO);
 		pink = new PinkNoise(0.0f);
 		out.addSignal(pink)
 		
-		
-		mf.addBottombarComponentRight(noisePanel)
-		
 		mf.frame.visible = true
 		
-		//container.play()
-
-        
 		
-		controlHud = new ControlHud(container)
-		//controlHud.visible = true
-		//panel.start()
-		
-		tabManager.setCurrentComponent(canvasPanel)
 		
 		//mf.getContent().addKeyListener(new SimKeyListener());
 		

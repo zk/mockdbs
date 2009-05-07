@@ -1,4 +1,4 @@
-package napplelabs.dbssim.neuron;
+package napplelabs.dbssim.canvasviews;
 
 import java.awt.Color;
 
@@ -6,8 +6,6 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
 import edu.umd.cs.piccolo.PNode;
-import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
-import edu.umd.cs.piccolo.event.PInputEvent;
 import edu.umd.cs.piccolo.nodes.PPath;
 
 public class NeuronPath extends PNode {
