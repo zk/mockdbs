@@ -1,0 +1,14 @@
+<object-stream>
+  <list>
+    <napplelabs.dbssim.neuron.NeuronType>
+      <name>asdf</name>
+      <mediaPath>/Users/zkim/Desktop/6KnowYourEnemy.mp3</mediaPath>
+      <color>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+        <alpha>255</alpha>
+      </color>
+    </napplelabs.dbssim.neuron.NeuronType>
+  </list>
+</object-stream>

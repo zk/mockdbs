@@ -59,6 +59,6 @@ class NodeDragHandler extends PDragSequenceEventHandler {
 		n.translate(e.getDelta().width, e.getDelta().height);
 		
 		cp.recalcDistances();
-		cp.persist();
+		cp.persistNeuronsOnCanvas();
 	}
 }

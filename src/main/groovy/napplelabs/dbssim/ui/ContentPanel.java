@@ -38,6 +38,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -95,6 +96,8 @@ public class ContentPanel extends JPanel {
 	private JPanel featurePanel;
 
 	private JButton newNeuronButton;
+	
+	private List<NeuronType> userNeuronTypes = new ArrayList<NeuronType>();
 
 	public ContentPanel(final List<NeuronType> neuronTypes, final Minim minim,
 			final JLabel label) {
@@ -111,6 +114,8 @@ public class ContentPanel extends JPanel {
 		PLayer backgroundLayer = new PLayer();
 		canvas.getCamera().addLayer(1, backgroundLayer);
 
+		load();
+		
 		probe = new Probe();
 
 		panel.add(createFeaturePanel(), BorderLayout.CENTER);
@@ -129,6 +134,7 @@ public class ContentPanel extends JPanel {
 		canvas.getLayer().addInputEventListener(new PBasicInputEventHandler() {
 			@Override
 			public void mouseClicked(PInputEvent evt) {
+				if(evt.getButton() != 3) return;
 				PNode picked = evt.getPickedNode();
 				
 				final NeuronPath path = findNeuronPath(picked);
@@ -147,7 +153,7 @@ public class ContentPanel extends JPanel {
 		});
 		
 
-		load();
+		
 		// Birds eye stuff
 
 		BirdsEyeView view = new BirdsEyeView();
@@ -220,6 +226,7 @@ public class ContentPanel extends JPanel {
 		path.removeFromParent();
 		path.setPlaying(false);
 		neurons.remove(path);
+		persistNeuronsOnCanvas();
 	}
 
 	/**
@@ -287,8 +294,10 @@ public class ContentPanel extends JPanel {
 				nnd.setVisisble(true);
 				NeuronType nt = nnd.getNeuronType();
 				if(nt != null) {
+					userNeuronTypes.add(nt);
 					featurePanel.add(createNeuronPanel(nt), "wrap");
 					featurePanel.validate();
+					persistNeuronTypes();
 				}
 				
 			}
@@ -306,24 +315,14 @@ public class ContentPanel extends JPanel {
 			featurePanel.add(np, "wrap");
 		}
 		
+		for(final NeuronType nt: userNeuronTypes) {
+			JPanel np = createNeuronPanel(nt);
+			
+			//button.setFont(new Font("Arial", Font.PLAIN, 8));
+			
+			featurePanel.add(np, "wrap");
+		}
 		
-
-		/*
-		 * JButton importButton = new JButton("Import Media");
-		 * panel.add(importButton, "wrap");
-		 * 
-		 * JComboBox userNeuronsCombo = new JComboBox();
-		 * userNeuronsCombo.addItem("hello world this is zack");
-		 * userNeuronsCombo.addItem("qwer asdf zxcv ");
-		 * panel.add(userNeuronsCombo, "wrap");
-		 * 
-		 * JButton addButton = new JButton("Add");
-		 * addButton.addActionListener(new ActionListener() {
-		 * 
-		 * public void actionPerformed(ActionEvent e) { new AddMediaHud(); }
-		 * 
-		 * }); panel.add(addButton, "wrap");
-		 */
 		return featurePanel;
 
 	}
@@ -391,7 +390,7 @@ public class ContentPanel extends JPanel {
 			
 		});
 
-		persist();
+		persistNeuronsOnCanvas();
 	}
 
 	private Component createDepthPanel() {
@@ -453,10 +452,10 @@ public class ContentPanel extends JPanel {
 		}
 	}
 
-	public void persist() {
+	public void persistNeuronsOnCanvas() {
 		XStream xs = new XStream();
 
-		// Write to a file in the file system
+		// Write neurons on canvas
 		try {
 
 			List<NeuronPathRep> reps = new ArrayList<NeuronPathRep>();
@@ -478,6 +477,21 @@ public class ContentPanel extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+
+	private void persistNeuronTypes() {
+		
+		XStream xs = new XStream();
+		
+		//Write neuron types
+		try {
+			ObjectOutputStream os = xs.createObjectOutputStream(new FileWriter(new File("./neuron_types.xstream.xml")));
+			os.writeObject(userNeuronTypes);
+			os.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void load() {
@@ -485,28 +499,45 @@ public class ContentPanel extends JPanel {
 
 		// Write to a file in the file system
 
-		if (!new File("./neurons").exists())
-			return;
-
-		try {
-			ObjectInputStream is = xs.createObjectInputStream(new FileReader(
-					new File("./neurons")));
-			List<NeuronPathRep> paths = (List<NeuronPathRep>) is.readObject();
-
-			for (NeuronPathRep r : paths) {
-				NeuronPath np = new NeuronPath(r.color, r.name, r.mediaFile, minim);
-				np.setOffset(r.location);
-				addNeuronPath(np);
+		if (new File("./neurons").exists()) {
+			
+			try {
+				ObjectInputStream is = xs.createObjectInputStream(new FileReader(
+						new File("./neurons")));
+				List<NeuronPathRep> paths = (List<NeuronPathRep>) is.readObject();
+	
+				for (NeuronPathRep r : paths) {
+					NeuronPath np = new NeuronPath(r.color, r.name, r.mediaFile, minim);
+					np.setOffset(r.location);
+					addNeuronPath(np);
+				}
+	
+				is.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-
-			is.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
+		if(new File("./neuron_types.xstream.xml").exists()) {
+			try {
+				ObjectInputStream is = xs.createObjectInputStream(new FileReader(new File("./neuron_types.xstream.xml")));
+				userNeuronTypes = (List<NeuronType>) is.readObject();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 
 	}
 }
