@@ -77,7 +77,7 @@ import edu.umd.cs.piccolox.nodes.P3DRect;
             // create the coverage node
             areaVisiblePNode = PPath.createRectangle(0, 0, 100, 100);
             areaVisiblePNode.setPaint(new Color(128, 128, 255));
-            areaVisiblePNode.setTransparency(.4f);
+            areaVisiblePNode.setTransparency(.2f);
             areaVisiblePNode.setBounds(0, 0, 100, 100);
             getCamera().addChild(areaVisiblePNode);
             

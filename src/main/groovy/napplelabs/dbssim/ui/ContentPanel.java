@@ -23,6 +23,9 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
+import java.awt.FileDialog;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.KeyEventDispatcher;
@@ -31,6 +34,7 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
@@ -42,10 +46,14 @@ import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -61,11 +69,14 @@ import com.thoughtworks.xstream.XStream;
 import ddf.minim.Minim;
 import edu.umd.cs.piccolo.PCanvas;
 import edu.umd.cs.piccolo.PLayer;
+import edu.umd.cs.piccolo.PNode;
 import edu.umd.cs.piccolo.event.PBasicInputEventHandler;
 import edu.umd.cs.piccolo.event.PInputEvent;
+import edu.umd.cs.piccolo.event.PInputEventListener;
 import edu.umd.cs.piccolo.util.PPaintContext;
 
-public class CanvasPanel extends JPanel {
+
+public class ContentPanel extends JPanel {
 
 	PCanvas canvas = new PCanvas();
 
@@ -81,7 +92,11 @@ public class CanvasPanel extends JPanel {
 
 	private final List<NeuronType> neuronTypes;
 
-	public CanvasPanel(final List<NeuronType> neuronTypes, final Minim minim,
+	private JPanel featurePanel;
+
+	private JButton newNeuronButton;
+
+	public ContentPanel(final List<NeuronType> neuronTypes, final Minim minim,
 			final JLabel label) {
 		this.neuronTypes = neuronTypes;
 		this.label = label;
@@ -89,6 +104,7 @@ public class CanvasPanel extends JPanel {
 		setLayout(new BorderLayout());
 		add(canvas, BorderLayout.CENTER);
 		JPanel panel = new JPanel();
+		
 		add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout());
 
@@ -110,6 +126,26 @@ public class CanvasPanel extends JPanel {
 		backgroundLayer.addChild(probe);
 
 		canvas.getLayer().addInputEventListener(new NodeDragHandler(this));
+		canvas.getLayer().addInputEventListener(new PBasicInputEventHandler() {
+			@Override
+			public void mouseClicked(PInputEvent evt) {
+				PNode picked = evt.getPickedNode();
+				
+				final NeuronPath path = findNeuronPath(picked);
+				
+				JPopupMenu menu = createPopupMenu(path);
+				
+				double posX = evt.getCanvasPosition().getX();
+				double posY = evt.getCanvasPosition().getY();
+				
+				menu.show(canvas, (int) posX, (int) posY);
+				
+				/*if(path != null) {
+					addNeuron(NeuronPath.copy(path));
+				}*/
+			}
+		});
+		
 
 		load();
 		// Birds eye stuff
@@ -157,45 +193,120 @@ public class CanvasPanel extends JPanel {
 				});
 
 	}
+	
+	/**
+	 * Creates the popup menu shown when a NeuronPath is right-clicked
+	 * on.
+	 * @return 
+	 */
+	public JPopupMenu createPopupMenu(final NeuronPath neuronPath) {
+		JPopupMenu menu = new JPopupMenu();
+		menu.add(new AbstractAction("Clone " + neuronPath.getName()) {
+			public void actionPerformed(ActionEvent e) {
+				addNeuronPath(NeuronPath.copy(neuronPath));
+			}
+		});
+		
+		menu.add(new AbstractAction("Remove " + neuronPath.getName()) {
+			public void actionPerformed(ActionEvent e) {
+				removeNeuronPath(neuronPath);
+			}
+		});
+		
+		return menu;
+	}
+
+	private void removeNeuronPath(final NeuronPath path) {
+		path.removeFromParent();
+		path.setPlaying(false);
+		neurons.remove(path);
+	}
+
+	/**
+	 * Walks up parents until neuron path is found. Returns null if not.
+	 * @param picked
+	 * @return NeuronPath found, or null if none found.
+	 */
+	private NeuronPath findNeuronPath(PNode picked) {
+		if(picked instanceof NeuronPath) return (NeuronPath) picked;
+		PNode node = picked;
+		while(node != null) {
+			if(node.getParent() instanceof NeuronPath) return (NeuronPath) node.getParent();
+			node = node.getParent();
+		}
+		return null;
+	}
+	
+	/**
+	 * Adds panel to the end of the feature panel
+	 * @param panel
+	 */
+	private void addFeaturePanel(JPanel panel) {
+		/*int addNeuronButtonIndex = 0;
+		for(Component c: featurePanel.getComponents()) {
+			if(c == newNeuronButton) {
+				break;
+			}
+			addNeuronButtonIndex++;
+		}
+		
+		featurePanel.add(panel, addNeuronButtonIndex);*/
+		
+	}
 
 	private Component createFeaturePanel() {
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(new MigLayout("wrap 2"));
+		featurePanel = new JPanel();
+		featurePanel.setLayout(new MigLayout("wrap 2"));
+		
+		newNeuronButton = new JButton("Add new neuron");
+		newNeuronButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				/*JFrame frame = walkToFindJFrame(ContentPanel.this);
+				if(frame == null) {
+					System.out.println("Couldn't find jframe");
+					return;
+				}
+				FileDialog fd = new FileDialog(frame);
+				fd.setVisible(true);
+				
+				String file = fd.getDirectory() + fd.getFile();
+				if(file == null) {
+					System.out.println("File not chosen");
+					return;
+				}
+				
+				System.out.println(file);
+				
+				NeuronType nt = new NeuronType("Unknown", file, Color.white);
+				featurePanel.add(createNeuronPanel(nt), "wrap");
+				featurePanel.validate();*/
+				
+				NewNeuronDialog nnd = new NewNeuronDialog();
+				nnd.setVisisble(true);
+				NeuronType nt = nnd.getNeuronType();
+				if(nt != null) {
+					featurePanel.add(createNeuronPanel(nt), "wrap");
+					featurePanel.validate();
+				}
+				
+			}
+			
+		});
+		featurePanel.add(newNeuronButton, "wrap");
+		
+		
 		
 		for(final NeuronType nt: neuronTypes) {
-			JPanel np = new JPanel();
-			np.setLayout(new MigLayout("wrap 2, ins 0"));
-			
-			JButton button = new JButton(nt.getName());
-			
-			JPanel neuronPreviewPanel = new JPanel() {
-				@Override
-				public void paint(final Graphics _g) {
-					Graphics2D g = (Graphics2D) _g;
-					
-					g.setPaint(nt.getColor());
-					g.setStroke(new BasicStroke(0.75f));
-					g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-					g.fillOval(2, 2, getWidth()-4, getHeight()-4);
-					g.setColor(Color.BLACK);
-					g.drawOval(2, 2, getWidth()-4, getHeight()-4);
-				}
-			};
-			
-			np.add(neuronPreviewPanel, "width 30, height 30");
-			np.add(button);
-			
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(final ActionEvent e) {
-					addNeuron(new NeuronPath(nt, minim));
-				}
-			});
+			JPanel np = createNeuronPanel(nt);
 			
 			//button.setFont(new Font("Arial", Font.PLAIN, 8));
 			
-			panel.add(np, "wrap");
+			featurePanel.add(np, "wrap");
 		}
+		
+		
 
 		/*
 		 * JButton importButton = new JButton("Import Media");
@@ -213,11 +324,57 @@ public class CanvasPanel extends JPanel {
 		 * 
 		 * }); panel.add(addButton, "wrap");
 		 */
-		return panel;
+		return featurePanel;
 
 	}
 
-	public void addNeuron(final NeuronPath path) {
+	private JPanel createNeuronPanel(final NeuronType nt) {
+		JPanel np = new JPanel();
+		np.setLayout(new MigLayout("wrap 2, ins 0"));
+		
+		JButton button = new JButton(nt.getName());
+		
+		JPanel neuronPreviewPanel = new JPanel() {
+			@Override
+			public void paint(final Graphics _g) {
+				Graphics2D g = (Graphics2D) _g;
+				
+				g.setPaint(nt.getColor());
+				g.setStroke(new BasicStroke(0.75f));
+				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				g.fillOval(2, 2, getWidth()-4, getHeight()-4);
+				g.setColor(Color.BLACK);
+				g.drawOval(2, 2, getWidth()-4, getHeight()-4);
+			}
+		};
+		
+		np.add(neuronPreviewPanel, "width 30, height 30");
+		np.add(button);
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				addNeuronPath(new NeuronPath(nt, minim));
+			}
+		});
+		return np;
+	}
+
+	/**
+	 * Walks up getParent() till a JFrame is found, or returns null.
+	 * @param c
+	 * @return found JFrame, or null if none found.
+	 */
+	protected JFrame walkToFindJFrame(Container c) {
+		Container curr = c;
+		while(curr != null) {
+			if(curr.getParent() instanceof JFrame) return (JFrame) curr.getParent();
+			curr = curr.getParent();
+		}
+		
+		return null;
+	}
+
+	public void addNeuronPath(final NeuronPath path) {
 		path.translate(canvas.getCamera().getViewBounds().getCenterX(), canvas
 				.getCamera().getViewBounds().getCenterY());
 		canvas.getLayer().addChild(path);
@@ -227,11 +384,11 @@ public class CanvasPanel extends JPanel {
 			@Override
 			public void mouseClicked(final PInputEvent evt) {
 				if (evt.isLeftMouseButton() && evt.getClickCount() == 2) {
-					path.removeFromParent();
-					path.setPlaying(false);
-					neurons.remove(path);
+					removeNeuronPath(path);
 				}
 			}
+
+			
 		});
 
 		persist();
@@ -308,6 +465,7 @@ public class CanvasPanel extends JPanel {
 				r.color = p.getColor();
 				r.mediaFile = p.getMediaFile();
 				r.location = p.getGlobalTranslation();
+				r.name = p.getName();
 				reps.add(r);
 			}
 
@@ -336,9 +494,9 @@ public class CanvasPanel extends JPanel {
 			List<NeuronPathRep> paths = (List<NeuronPathRep>) is.readObject();
 
 			for (NeuronPathRep r : paths) {
-				NeuronPath np = new NeuronPath(r.color, r.mediaFile, minim);
+				NeuronPath np = new NeuronPath(r.color, r.name, r.mediaFile, minim);
 				np.setOffset(r.location);
-				addNeuron(np);
+				addNeuronPath(np);
 			}
 
 			is.close();

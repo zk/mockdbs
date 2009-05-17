@@ -26,4 +26,5 @@ public class NeuronPathRep {
 	public Color color = Color.black;
 	public String mediaFile = "";
 	public Point2D location = new Point2D.Double();
+	public String name = "";
 }

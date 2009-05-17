@@ -129,11 +129,6 @@
 			<artifactId>livegraph</artifactId>
 			<version>2.0b1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.live-graph</groupId>
-			<artifactId>softnetconsultutils</artifactId>
-			<version>2.01slim</version>
-		</dependency>
 	</dependencies>
 
 	<build>

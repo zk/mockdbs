@@ -33,9 +33,11 @@ public class NeuronPath extends PNode {
 	private Minim minim;
 	private AudioPlayer player;
 	private PPath path;
+	private final String name;
 
-	public NeuronPath(final Color color, final String mediaFile, final Minim minim) {
+	public NeuronPath(final Color color, final String name, final String mediaFile, final Minim minim) {
 		this.color = color;
+		this.name = name;
 		this.mediaFile = mediaFile;
 		this.minim = minim;
 		init();
@@ -45,6 +47,7 @@ public class NeuronPath extends PNode {
 		this.mediaFile = nt.getMediaPath();
 		this.minim = minim;
 		this.color = nt.getColor();
+		this.name = nt.getName();
 		init();
 	}
 
@@ -94,5 +97,21 @@ public class NeuronPath extends PNode {
 	public String getMediaFile() {
 		return mediaFile;
 	}
+	
+	
+
+	private Minim getMinim() {
+		return minim;
+	}
+	
+	public static NeuronPath copy(NeuronPath o) {
+		return new NeuronPath(o.getColor(), o.getName(), o.getMediaFile(), o.getMinim());
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	
 }
 

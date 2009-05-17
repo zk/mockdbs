@@ -9,9 +9,10 @@
       </color>
       <mediaFile>./neuron_media_files/thalamus.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>-5.531233141709265</x>
-        <y>8.022518908958375</y>
+        <x>476.6380902050415</x>
+        <y>-1773.851652578137</y>
       </location>
+      <name>Thalamus</name>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
       <color>
@@ -22,22 +23,75 @@
       </color>
       <mediaFile>./neuron_media_files/stn.wav</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>-31.692084298663872</x>
-        <y>104.7261646672901</y>
+        <x>499.6380902050415</x>
+        <y>-1869.851652578137</y>
       </location>
+      <name>STN</name>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color reference="../../napplelabs.dbssim.neuron.NeuronPathRep[2]/color"/>
+      <mediaFile>./neuron_media_files/stn.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>456.6380902050415</x>
+        <y>-1708.851652578137</y>
+      </location>
+      <name>STN</name>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color>
+        <red>255</red>
+        <green>0</green>
+        <blue>0</blue>
+        <alpha>255</alpha>
+      </color>
+      <mediaFile>./neuron_media_files/stn.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>-64.5</x>
+        <y>264.5</y>
+      </location>
+      <name>STN</name>
     </napplelabs.dbssim.neuron.NeuronPathRep>
     <napplelabs.dbssim.neuron.NeuronPathRep>
       <color>
         <red>0</red>
-        <green>0</green>
+        <green>255</green>
+        <blue>0</blue>
+        <alpha>255</alpha>
+      </color>
+      <mediaFile>./neuron_media_files/snr.wav</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>432.6419157933737</x>
+        <y>-1614.6416112248066</y>
+      </location>
+      <name>SNr</name>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color>
+        <red>255</red>
+        <green>255</green>
         <blue>255</blue>
         <alpha>255</alpha>
       </color>
-      <mediaFile>./neuron_media_files/thalamus.wav</mediaFile>
+      <mediaFile>/Users/zkim/Music/iTunes/iTunes Music/Lady Gaga/Top 40 Singles/13 Just Dance.mp3</mediaFile>
       <location class="java.awt.geom.Point2D$Double">
-        <x>8.0</x>
-        <y>-15.5</y>
+        <x>-3.5</x>
+        <y>16.5</y>
       </location>
+      <name>Unknown</name>
+    </napplelabs.dbssim.neuron.NeuronPathRep>
+    <napplelabs.dbssim.neuron.NeuronPathRep>
+      <color>
+        <red>31</red>
+        <green>20</green>
+        <blue>20</blue>
+        <alpha>255</alpha>
+      </color>
+      <mediaFile>/Users/zkim/Desktop/6KnowYourEnemy.mp3</mediaFile>
+      <location class="java.awt.geom.Point2D$Double">
+        <x>22.112921893940836</x>
+        <y>-66.15348105304298</y>
+      </location>
+      <name>Rage</name>
     </napplelabs.dbssim.neuron.NeuronPathRep>
   </list>
 </object-stream>

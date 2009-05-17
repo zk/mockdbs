@@ -26,9 +26,9 @@ import edu.umd.cs.piccolo.event.PInputEvent;
 
 class NodeDragHandler extends PDragSequenceEventHandler {
 	
-	private CanvasPanel cp;
+	private ContentPanel cp;
 	
-	public NodeDragHandler(CanvasPanel cp) {
+	public NodeDragHandler(ContentPanel cp) {
 		this.cp = cp;
 		getEventFilter().setMarksAcceptedEventsAsHandled(true);
 	}

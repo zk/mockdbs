@@ -31,6 +31,12 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.LiveGraph.dataCache.DataCache;
+import org.LiveGraph.dataCache.DataCache.CacheMode;
+import org.LiveGraph.gui.GUIManager;
+import org.LiveGraph.gui.plot.PlotPanel;
+import org.LiveGraph.plot.Plotter;
+
 import napplelabs.dbssim.neuron.NeuronType;
 import processing.core.PApplet;
 
@@ -65,6 +71,9 @@ public class SimUI {
 		mf = new MacFrame(1200, 800);
 
 		// Top bar setup
+		
+		
+		//mf.addToolbarComponentCenter();
 
 		// Bottom bar setup
 		JLabel depthLabel = new JLabel("0.00 mm");
@@ -94,7 +103,7 @@ public class SimUI {
 		);
 		
 		Minim minim = new Minim(new PApplet());
-		CanvasPanel canvasPanel = new CanvasPanel(neuronTypes, minim, depthLabel);
+		ContentPanel canvasPanel = new ContentPanel(neuronTypes, minim, depthLabel);
 		mf.getContent().add(canvasPanel, BorderLayout.CENTER);
 
 		double one = (float) (1.1 * Math.PI / 100);
